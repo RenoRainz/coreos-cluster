@@ -2,9 +2,9 @@
 
 namespace Base;
 
+use \Customer as ChildCustomer;
+use \CustomerQuery as ChildCustomerQuery;
 use \PeopleQuery as ChildPeopleQuery;
-use \User as ChildUser;
-use \UserQuery as ChildUserQuery;
 use \Exception;
 use \PDO;
 use Map\PeopleTableMap;
@@ -68,18 +68,6 @@ abstract class People implements ActiveRecordInterface
     protected $id;
 
     /**
-     * The value for the cuserid field.
-     * @var        int
-     */
-    protected $cuserid;
-
-    /**
-     * The value for the muserid field.
-     * @var        int
-     */
-    protected $muserid;
-
-    /**
      * The value for the title field.
      * @var        string
      */
@@ -104,16 +92,22 @@ abstract class People implements ActiveRecordInterface
     protected $email;
 
     /**
+     * The value for the email2 field.
+     * @var        string
+     */
+    protected $email2;
+
+    /**
      * The value for the address field.
      * @var        string
      */
     protected $address;
 
     /**
-     * The value for the zipcode field.
+     * The value for the zip field.
      * @var        string
      */
-    protected $zipcode;
+    protected $zip;
 
     /**
      * The value for the city field.
@@ -158,9 +152,9 @@ abstract class People implements ActiveRecordInterface
     protected $mailinglist;
 
     /**
-     * @var        ChildUser one-to-one related ChildUser object
+     * @var        ChildCustomer one-to-one related ChildCustomer object
      */
-    protected $singleUser;
+    protected $singleCustomer;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -398,26 +392,6 @@ abstract class People implements ActiveRecordInterface
     }
 
     /**
-     * Get the [cuserid] column value.
-     *
-     * @return int
-     */
-    public function getCuserid()
-    {
-        return $this->cuserid;
-    }
-
-    /**
-     * Get the [muserid] column value.
-     *
-     * @return int
-     */
-    public function getMuserid()
-    {
-        return $this->muserid;
-    }
-
-    /**
      * Get the [title] column value.
      *
      * @return string
@@ -458,6 +432,16 @@ abstract class People implements ActiveRecordInterface
     }
 
     /**
+     * Get the [email2] column value.
+     *
+     * @return string
+     */
+    public function getEmail2()
+    {
+        return $this->email2;
+    }
+
+    /**
      * Get the [address] column value.
      *
      * @return string
@@ -468,13 +452,13 @@ abstract class People implements ActiveRecordInterface
     }
 
     /**
-     * Get the [zipcode] column value.
+     * Get the [zip] column value.
      *
      * @return string
      */
-    public function getZipcode()
+    public function getZip()
     {
-        return $this->zipcode;
+        return $this->zip;
     }
 
     /**
@@ -578,46 +562,6 @@ abstract class People implements ActiveRecordInterface
     } // setId()
 
     /**
-     * Set the value of [cuserid] column.
-     *
-     * @param  int $v new value
-     * @return $this|\People The current object (for fluent API support)
-     */
-    public function setCuserid($v)
-    {
-        if ($v !== null) {
-            $v = (int) $v;
-        }
-
-        if ($this->cuserid !== $v) {
-            $this->cuserid = $v;
-            $this->modifiedColumns[PeopleTableMap::COL_CUSERID] = true;
-        }
-
-        return $this;
-    } // setCuserid()
-
-    /**
-     * Set the value of [muserid] column.
-     *
-     * @param  int $v new value
-     * @return $this|\People The current object (for fluent API support)
-     */
-    public function setMuserid($v)
-    {
-        if ($v !== null) {
-            $v = (int) $v;
-        }
-
-        if ($this->muserid !== $v) {
-            $this->muserid = $v;
-            $this->modifiedColumns[PeopleTableMap::COL_MUSERID] = true;
-        }
-
-        return $this;
-    } // setMuserid()
-
-    /**
      * Set the value of [title] column.
      *
      * @param  string $v new value
@@ -698,6 +642,26 @@ abstract class People implements ActiveRecordInterface
     } // setEmail()
 
     /**
+     * Set the value of [email2] column.
+     *
+     * @param  string $v new value
+     * @return $this|\People The current object (for fluent API support)
+     */
+    public function setEmail2($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->email2 !== $v) {
+            $this->email2 = $v;
+            $this->modifiedColumns[PeopleTableMap::COL_EMAIL2] = true;
+        }
+
+        return $this;
+    } // setEmail2()
+
+    /**
      * Set the value of [address] column.
      *
      * @param  string $v new value
@@ -718,24 +682,24 @@ abstract class People implements ActiveRecordInterface
     } // setAddress()
 
     /**
-     * Set the value of [zipcode] column.
+     * Set the value of [zip] column.
      *
      * @param  string $v new value
      * @return $this|\People The current object (for fluent API support)
      */
-    public function setZipcode($v)
+    public function setZip($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->zipcode !== $v) {
-            $this->zipcode = $v;
-            $this->modifiedColumns[PeopleTableMap::COL_ZIPCODE] = true;
+        if ($this->zip !== $v) {
+            $this->zip = $v;
+            $this->modifiedColumns[PeopleTableMap::COL_ZIP] = true;
         }
 
         return $this;
-    } // setZipcode()
+    } // setZip()
 
     /**
      * Set the value of [city] column.
@@ -924,49 +888,46 @@ abstract class People implements ActiveRecordInterface
             $col = $row[TableMap::TYPE_NUM == $indexType ? 0 + $startcol : PeopleTableMap::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)];
             $this->id = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : PeopleTableMap::translateFieldName('Cuserid', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->cuserid = (null !== $col) ? (int) $col : null;
-
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : PeopleTableMap::translateFieldName('Muserid', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->muserid = (null !== $col) ? (int) $col : null;
-
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : PeopleTableMap::translateFieldName('Title', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : PeopleTableMap::translateFieldName('Title', TableMap::TYPE_PHPNAME, $indexType)];
             $this->title = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : PeopleTableMap::translateFieldName('Lastname', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : PeopleTableMap::translateFieldName('Lastname', TableMap::TYPE_PHPNAME, $indexType)];
             $this->lastname = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : PeopleTableMap::translateFieldName('Firstname', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : PeopleTableMap::translateFieldName('Firstname', TableMap::TYPE_PHPNAME, $indexType)];
             $this->firstname = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : PeopleTableMap::translateFieldName('Email', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : PeopleTableMap::translateFieldName('Email', TableMap::TYPE_PHPNAME, $indexType)];
             $this->email = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : PeopleTableMap::translateFieldName('Address', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : PeopleTableMap::translateFieldName('Email2', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->email2 = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : PeopleTableMap::translateFieldName('Address', TableMap::TYPE_PHPNAME, $indexType)];
             $this->address = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 8 + $startcol : PeopleTableMap::translateFieldName('Zipcode', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->zipcode = (null !== $col) ? (string) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : PeopleTableMap::translateFieldName('Zip', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->zip = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 9 + $startcol : PeopleTableMap::translateFieldName('City', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 8 + $startcol : PeopleTableMap::translateFieldName('City', TableMap::TYPE_PHPNAME, $indexType)];
             $this->city = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 10 + $startcol : PeopleTableMap::translateFieldName('State', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 9 + $startcol : PeopleTableMap::translateFieldName('State', TableMap::TYPE_PHPNAME, $indexType)];
             $this->state = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 11 + $startcol : PeopleTableMap::translateFieldName('Latitude', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 10 + $startcol : PeopleTableMap::translateFieldName('Latitude', TableMap::TYPE_PHPNAME, $indexType)];
             $this->latitude = (null !== $col) ? (double) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 12 + $startcol : PeopleTableMap::translateFieldName('Longitude', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 11 + $startcol : PeopleTableMap::translateFieldName('Longitude', TableMap::TYPE_PHPNAME, $indexType)];
             $this->longitude = (null !== $col) ? (double) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 13 + $startcol : PeopleTableMap::translateFieldName('Phone', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 12 + $startcol : PeopleTableMap::translateFieldName('Phone', TableMap::TYPE_PHPNAME, $indexType)];
             $this->phone = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 14 + $startcol : PeopleTableMap::translateFieldName('Lang', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 13 + $startcol : PeopleTableMap::translateFieldName('Lang', TableMap::TYPE_PHPNAME, $indexType)];
             $this->lang = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 15 + $startcol : PeopleTableMap::translateFieldName('Mailinglist', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 14 + $startcol : PeopleTableMap::translateFieldName('Mailinglist', TableMap::TYPE_PHPNAME, $indexType)];
             $this->mailinglist = (null !== $col) ? (boolean) $col : null;
             $this->resetModified();
 
@@ -976,7 +937,7 @@ abstract class People implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 16; // 16 = PeopleTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 15; // 15 = PeopleTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\People'), 0, $e);
@@ -1037,7 +998,7 @@ abstract class People implements ActiveRecordInterface
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->singleUser = null;
+            $this->singleCustomer = null;
 
         } // if (deep)
     }
@@ -1149,9 +1110,9 @@ abstract class People implements ActiveRecordInterface
                 $this->resetModified();
             }
 
-            if ($this->singleUser !== null) {
-                if (!$this->singleUser->isDeleted() && ($this->singleUser->isNew() || $this->singleUser->isModified())) {
-                    $affectedRows += $this->singleUser->save($con);
+            if ($this->singleCustomer !== null) {
+                if (!$this->singleCustomer->isDeleted() && ($this->singleCustomer->isNew() || $this->singleCustomer->isModified())) {
+                    $affectedRows += $this->singleCustomer->save($con);
                 }
             }
 
@@ -1179,34 +1140,40 @@ abstract class People implements ActiveRecordInterface
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . PeopleTableMap::COL_ID . ')');
         }
+        if (null === $this->id) {
+            try {
+                $dataFetcher = $con->query("SELECT nextval('people_id_seq')");
+                $this->id = $dataFetcher->fetchColumn();
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', 0, $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(PeopleTableMap::COL_ID)) {
             $modifiedColumns[':p' . $index++]  = 'id';
         }
-        if ($this->isColumnModified(PeopleTableMap::COL_CUSERID)) {
-            $modifiedColumns[':p' . $index++]  = 'cUserId';
-        }
-        if ($this->isColumnModified(PeopleTableMap::COL_MUSERID)) {
-            $modifiedColumns[':p' . $index++]  = 'mUserId';
-        }
         if ($this->isColumnModified(PeopleTableMap::COL_TITLE)) {
             $modifiedColumns[':p' . $index++]  = 'title';
         }
         if ($this->isColumnModified(PeopleTableMap::COL_LASTNAME)) {
-            $modifiedColumns[':p' . $index++]  = 'lastName';
+            $modifiedColumns[':p' . $index++]  = 'lastname';
         }
         if ($this->isColumnModified(PeopleTableMap::COL_FIRSTNAME)) {
-            $modifiedColumns[':p' . $index++]  = 'firstName';
+            $modifiedColumns[':p' . $index++]  = 'firstname';
         }
         if ($this->isColumnModified(PeopleTableMap::COL_EMAIL)) {
             $modifiedColumns[':p' . $index++]  = 'email';
         }
+        if ($this->isColumnModified(PeopleTableMap::COL_EMAIL2)) {
+            $modifiedColumns[':p' . $index++]  = 'email2';
+        }
         if ($this->isColumnModified(PeopleTableMap::COL_ADDRESS)) {
             $modifiedColumns[':p' . $index++]  = 'address';
         }
-        if ($this->isColumnModified(PeopleTableMap::COL_ZIPCODE)) {
-            $modifiedColumns[':p' . $index++]  = 'zipCode';
+        if ($this->isColumnModified(PeopleTableMap::COL_ZIP)) {
+            $modifiedColumns[':p' . $index++]  = 'zip';
         }
         if ($this->isColumnModified(PeopleTableMap::COL_CITY)) {
             $modifiedColumns[':p' . $index++]  = 'city';
@@ -1227,7 +1194,7 @@ abstract class People implements ActiveRecordInterface
             $modifiedColumns[':p' . $index++]  = 'lang';
         }
         if ($this->isColumnModified(PeopleTableMap::COL_MAILINGLIST)) {
-            $modifiedColumns[':p' . $index++]  = 'mailingList';
+            $modifiedColumns[':p' . $index++]  = 'mailinglist';
         }
 
         $sql = sprintf(
@@ -1243,29 +1210,26 @@ abstract class People implements ActiveRecordInterface
                     case 'id':
                         $stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case 'cUserId':
-                        $stmt->bindValue($identifier, $this->cuserid, PDO::PARAM_INT);
-                        break;
-                    case 'mUserId':
-                        $stmt->bindValue($identifier, $this->muserid, PDO::PARAM_INT);
-                        break;
                     case 'title':
                         $stmt->bindValue($identifier, $this->title, PDO::PARAM_STR);
                         break;
-                    case 'lastName':
+                    case 'lastname':
                         $stmt->bindValue($identifier, $this->lastname, PDO::PARAM_STR);
                         break;
-                    case 'firstName':
+                    case 'firstname':
                         $stmt->bindValue($identifier, $this->firstname, PDO::PARAM_STR);
                         break;
                     case 'email':
                         $stmt->bindValue($identifier, $this->email, PDO::PARAM_STR);
                         break;
+                    case 'email2':
+                        $stmt->bindValue($identifier, $this->email2, PDO::PARAM_STR);
+                        break;
                     case 'address':
                         $stmt->bindValue($identifier, $this->address, PDO::PARAM_STR);
                         break;
-                    case 'zipCode':
-                        $stmt->bindValue($identifier, $this->zipcode, PDO::PARAM_STR);
+                    case 'zip':
+                        $stmt->bindValue($identifier, $this->zip, PDO::PARAM_STR);
                         break;
                     case 'city':
                         $stmt->bindValue($identifier, $this->city, PDO::PARAM_STR);
@@ -1285,8 +1249,8 @@ abstract class People implements ActiveRecordInterface
                     case 'lang':
                         $stmt->bindValue($identifier, $this->lang, PDO::PARAM_STR);
                         break;
-                    case 'mailingList':
-                        $stmt->bindValue($identifier, (int) $this->mailinglist, PDO::PARAM_INT);
+                    case 'mailinglist':
+                        $stmt->bindValue($identifier, $this->mailinglist, PDO::PARAM_BOOL);
                         break;
                 }
             }
@@ -1295,13 +1259,6 @@ abstract class People implements ActiveRecordInterface
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), 0, $e);
         }
-
-        try {
-            $pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', 0, $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }
@@ -1354,48 +1311,45 @@ abstract class People implements ActiveRecordInterface
                 return $this->getId();
                 break;
             case 1:
-                return $this->getCuserid();
-                break;
-            case 2:
-                return $this->getMuserid();
-                break;
-            case 3:
                 return $this->getTitle();
                 break;
-            case 4:
+            case 2:
                 return $this->getLastname();
                 break;
-            case 5:
+            case 3:
                 return $this->getFirstname();
                 break;
-            case 6:
+            case 4:
                 return $this->getEmail();
                 break;
-            case 7:
+            case 5:
+                return $this->getEmail2();
+                break;
+            case 6:
                 return $this->getAddress();
                 break;
-            case 8:
-                return $this->getZipcode();
+            case 7:
+                return $this->getZip();
                 break;
-            case 9:
+            case 8:
                 return $this->getCity();
                 break;
-            case 10:
+            case 9:
                 return $this->getState();
                 break;
-            case 11:
+            case 10:
                 return $this->getLatitude();
                 break;
-            case 12:
+            case 11:
                 return $this->getLongitude();
                 break;
-            case 13:
+            case 12:
                 return $this->getPhone();
                 break;
-            case 14:
+            case 13:
                 return $this->getLang();
                 break;
-            case 15:
+            case 14:
                 return $this->getMailinglist();
                 break;
             default:
@@ -1429,21 +1383,20 @@ abstract class People implements ActiveRecordInterface
         $keys = PeopleTableMap::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getId(),
-            $keys[1] => $this->getCuserid(),
-            $keys[2] => $this->getMuserid(),
-            $keys[3] => $this->getTitle(),
-            $keys[4] => $this->getLastname(),
-            $keys[5] => $this->getFirstname(),
-            $keys[6] => $this->getEmail(),
-            $keys[7] => $this->getAddress(),
-            $keys[8] => $this->getZipcode(),
-            $keys[9] => $this->getCity(),
-            $keys[10] => $this->getState(),
-            $keys[11] => $this->getLatitude(),
-            $keys[12] => $this->getLongitude(),
-            $keys[13] => $this->getPhone(),
-            $keys[14] => $this->getLang(),
-            $keys[15] => $this->getMailinglist(),
+            $keys[1] => $this->getTitle(),
+            $keys[2] => $this->getLastname(),
+            $keys[3] => $this->getFirstname(),
+            $keys[4] => $this->getEmail(),
+            $keys[5] => $this->getEmail2(),
+            $keys[6] => $this->getAddress(),
+            $keys[7] => $this->getZip(),
+            $keys[8] => $this->getCity(),
+            $keys[9] => $this->getState(),
+            $keys[10] => $this->getLatitude(),
+            $keys[11] => $this->getLongitude(),
+            $keys[12] => $this->getPhone(),
+            $keys[13] => $this->getLang(),
+            $keys[14] => $this->getMailinglist(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1451,20 +1404,20 @@ abstract class People implements ActiveRecordInterface
         }
 
         if ($includeForeignObjects) {
-            if (null !== $this->singleUser) {
+            if (null !== $this->singleCustomer) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
-                        $key = 'user';
+                        $key = 'customer';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'user';
+                        $key = 'customer';
                         break;
                     default:
-                        $key = 'User';
+                        $key = 'Customer';
                 }
 
-                $result[$key] = $this->singleUser->toArray($keyType, $includeLazyLoadColumns, $alreadyDumpedObjects, true);
+                $result[$key] = $this->singleCustomer->toArray($keyType, $includeLazyLoadColumns, $alreadyDumpedObjects, true);
             }
         }
 
@@ -1504,48 +1457,45 @@ abstract class People implements ActiveRecordInterface
                 $this->setId($value);
                 break;
             case 1:
-                $this->setCuserid($value);
-                break;
-            case 2:
-                $this->setMuserid($value);
-                break;
-            case 3:
                 $this->setTitle($value);
                 break;
-            case 4:
+            case 2:
                 $this->setLastname($value);
                 break;
-            case 5:
+            case 3:
                 $this->setFirstname($value);
                 break;
-            case 6:
+            case 4:
                 $this->setEmail($value);
                 break;
-            case 7:
+            case 5:
+                $this->setEmail2($value);
+                break;
+            case 6:
                 $this->setAddress($value);
                 break;
-            case 8:
-                $this->setZipcode($value);
+            case 7:
+                $this->setZip($value);
                 break;
-            case 9:
+            case 8:
                 $this->setCity($value);
                 break;
-            case 10:
+            case 9:
                 $this->setState($value);
                 break;
-            case 11:
+            case 10:
                 $this->setLatitude($value);
                 break;
-            case 12:
+            case 11:
                 $this->setLongitude($value);
                 break;
-            case 13:
+            case 12:
                 $this->setPhone($value);
                 break;
-            case 14:
+            case 13:
                 $this->setLang($value);
                 break;
-            case 15:
+            case 14:
                 $this->setMailinglist($value);
                 break;
         } // switch()
@@ -1578,49 +1528,46 @@ abstract class People implements ActiveRecordInterface
             $this->setId($arr[$keys[0]]);
         }
         if (array_key_exists($keys[1], $arr)) {
-            $this->setCuserid($arr[$keys[1]]);
+            $this->setTitle($arr[$keys[1]]);
         }
         if (array_key_exists($keys[2], $arr)) {
-            $this->setMuserid($arr[$keys[2]]);
+            $this->setLastname($arr[$keys[2]]);
         }
         if (array_key_exists($keys[3], $arr)) {
-            $this->setTitle($arr[$keys[3]]);
+            $this->setFirstname($arr[$keys[3]]);
         }
         if (array_key_exists($keys[4], $arr)) {
-            $this->setLastname($arr[$keys[4]]);
+            $this->setEmail($arr[$keys[4]]);
         }
         if (array_key_exists($keys[5], $arr)) {
-            $this->setFirstname($arr[$keys[5]]);
+            $this->setEmail2($arr[$keys[5]]);
         }
         if (array_key_exists($keys[6], $arr)) {
-            $this->setEmail($arr[$keys[6]]);
+            $this->setAddress($arr[$keys[6]]);
         }
         if (array_key_exists($keys[7], $arr)) {
-            $this->setAddress($arr[$keys[7]]);
+            $this->setZip($arr[$keys[7]]);
         }
         if (array_key_exists($keys[8], $arr)) {
-            $this->setZipcode($arr[$keys[8]]);
+            $this->setCity($arr[$keys[8]]);
         }
         if (array_key_exists($keys[9], $arr)) {
-            $this->setCity($arr[$keys[9]]);
+            $this->setState($arr[$keys[9]]);
         }
         if (array_key_exists($keys[10], $arr)) {
-            $this->setState($arr[$keys[10]]);
+            $this->setLatitude($arr[$keys[10]]);
         }
         if (array_key_exists($keys[11], $arr)) {
-            $this->setLatitude($arr[$keys[11]]);
+            $this->setLongitude($arr[$keys[11]]);
         }
         if (array_key_exists($keys[12], $arr)) {
-            $this->setLongitude($arr[$keys[12]]);
+            $this->setPhone($arr[$keys[12]]);
         }
         if (array_key_exists($keys[13], $arr)) {
-            $this->setPhone($arr[$keys[13]]);
+            $this->setLang($arr[$keys[13]]);
         }
         if (array_key_exists($keys[14], $arr)) {
-            $this->setLang($arr[$keys[14]]);
-        }
-        if (array_key_exists($keys[15], $arr)) {
-            $this->setMailinglist($arr[$keys[15]]);
+            $this->setMailinglist($arr[$keys[14]]);
         }
     }
 
@@ -1666,12 +1613,6 @@ abstract class People implements ActiveRecordInterface
         if ($this->isColumnModified(PeopleTableMap::COL_ID)) {
             $criteria->add(PeopleTableMap::COL_ID, $this->id);
         }
-        if ($this->isColumnModified(PeopleTableMap::COL_CUSERID)) {
-            $criteria->add(PeopleTableMap::COL_CUSERID, $this->cuserid);
-        }
-        if ($this->isColumnModified(PeopleTableMap::COL_MUSERID)) {
-            $criteria->add(PeopleTableMap::COL_MUSERID, $this->muserid);
-        }
         if ($this->isColumnModified(PeopleTableMap::COL_TITLE)) {
             $criteria->add(PeopleTableMap::COL_TITLE, $this->title);
         }
@@ -1684,11 +1625,14 @@ abstract class People implements ActiveRecordInterface
         if ($this->isColumnModified(PeopleTableMap::COL_EMAIL)) {
             $criteria->add(PeopleTableMap::COL_EMAIL, $this->email);
         }
+        if ($this->isColumnModified(PeopleTableMap::COL_EMAIL2)) {
+            $criteria->add(PeopleTableMap::COL_EMAIL2, $this->email2);
+        }
         if ($this->isColumnModified(PeopleTableMap::COL_ADDRESS)) {
             $criteria->add(PeopleTableMap::COL_ADDRESS, $this->address);
         }
-        if ($this->isColumnModified(PeopleTableMap::COL_ZIPCODE)) {
-            $criteria->add(PeopleTableMap::COL_ZIPCODE, $this->zipcode);
+        if ($this->isColumnModified(PeopleTableMap::COL_ZIP)) {
+            $criteria->add(PeopleTableMap::COL_ZIP, $this->zip);
         }
         if ($this->isColumnModified(PeopleTableMap::COL_CITY)) {
             $criteria->add(PeopleTableMap::COL_CITY, $this->city);
@@ -1797,14 +1741,13 @@ abstract class People implements ActiveRecordInterface
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setCuserid($this->getCuserid());
-        $copyObj->setMuserid($this->getMuserid());
         $copyObj->setTitle($this->getTitle());
         $copyObj->setLastname($this->getLastname());
         $copyObj->setFirstname($this->getFirstname());
         $copyObj->setEmail($this->getEmail());
+        $copyObj->setEmail2($this->getEmail2());
         $copyObj->setAddress($this->getAddress());
-        $copyObj->setZipcode($this->getZipcode());
+        $copyObj->setZip($this->getZip());
         $copyObj->setCity($this->getCity());
         $copyObj->setState($this->getState());
         $copyObj->setLatitude($this->getLatitude());
@@ -1818,9 +1761,9 @@ abstract class People implements ActiveRecordInterface
             // the getter/setter methods for fkey referrer objects.
             $copyObj->setNew(false);
 
-            $relObj = $this->getUser();
+            $relObj = $this->getCustomer();
             if ($relObj) {
-                $copyObj->setUser($relObj->copy($deepCopy));
+                $copyObj->setCustomer($relObj->copy($deepCopy));
             }
 
         } // if ($deepCopy)
@@ -1867,34 +1810,34 @@ abstract class People implements ActiveRecordInterface
     }
 
     /**
-     * Gets a single ChildUser object, which is related to this object by a one-to-one relationship.
+     * Gets a single ChildCustomer object, which is related to this object by a one-to-one relationship.
      *
      * @param  ConnectionInterface $con optional connection object
-     * @return ChildUser
+     * @return ChildCustomer
      * @throws PropelException
      */
-    public function getUser(ConnectionInterface $con = null)
+    public function getCustomer(ConnectionInterface $con = null)
     {
 
-        if ($this->singleUser === null && !$this->isNew()) {
-            $this->singleUser = ChildUserQuery::create()->findPk($this->getPrimaryKey(), $con);
+        if ($this->singleCustomer === null && !$this->isNew()) {
+            $this->singleCustomer = ChildCustomerQuery::create()->findPk($this->getPrimaryKey(), $con);
         }
 
-        return $this->singleUser;
+        return $this->singleCustomer;
     }
 
     /**
-     * Sets a single ChildUser object as related to this object by a one-to-one relationship.
+     * Sets a single ChildCustomer object as related to this object by a one-to-one relationship.
      *
-     * @param  ChildUser $v ChildUser
+     * @param  ChildCustomer $v ChildCustomer
      * @return $this|\People The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setUser(ChildUser $v = null)
+    public function setCustomer(ChildCustomer $v = null)
     {
-        $this->singleUser = $v;
+        $this->singleCustomer = $v;
 
-        // Make sure that that the passed-in ChildUser isn't already associated with this object
+        // Make sure that that the passed-in ChildCustomer isn't already associated with this object
         if ($v !== null && $v->getPeople(null, false) === null) {
             $v->setPeople($this);
         }
@@ -1910,14 +1853,13 @@ abstract class People implements ActiveRecordInterface
     public function clear()
     {
         $this->id = null;
-        $this->cuserid = null;
-        $this->muserid = null;
         $this->title = null;
         $this->lastname = null;
         $this->firstname = null;
         $this->email = null;
+        $this->email2 = null;
         $this->address = null;
-        $this->zipcode = null;
+        $this->zip = null;
         $this->city = null;
         $this->state = null;
         $this->latitude = null;
@@ -1943,12 +1885,12 @@ abstract class People implements ActiveRecordInterface
     public function clearAllReferences($deep = false)
     {
         if ($deep) {
-            if ($this->singleUser) {
-                $this->singleUser->clearAllReferences($deep);
+            if ($this->singleCustomer) {
+                $this->singleCustomer->clearAllReferences($deep);
             }
         } // if ($deep)
 
-        $this->singleUser = null;
+        $this->singleCustomer = null;
     }
 
     /**

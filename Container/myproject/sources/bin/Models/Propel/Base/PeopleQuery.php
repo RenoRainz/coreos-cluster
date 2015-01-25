@@ -21,106 +21,101 @@ use Propel\Runtime\Exception\PropelException;
  *
  *
  * @method     ChildPeopleQuery orderById($order = Criteria::ASC) Order by the id column
- * @method     ChildPeopleQuery orderByCuserid($order = Criteria::ASC) Order by the cUserId column
- * @method     ChildPeopleQuery orderByMuserid($order = Criteria::ASC) Order by the mUserId column
  * @method     ChildPeopleQuery orderByTitle($order = Criteria::ASC) Order by the title column
- * @method     ChildPeopleQuery orderByLastname($order = Criteria::ASC) Order by the lastName column
- * @method     ChildPeopleQuery orderByFirstname($order = Criteria::ASC) Order by the firstName column
+ * @method     ChildPeopleQuery orderByLastname($order = Criteria::ASC) Order by the lastname column
+ * @method     ChildPeopleQuery orderByFirstname($order = Criteria::ASC) Order by the firstname column
  * @method     ChildPeopleQuery orderByEmail($order = Criteria::ASC) Order by the email column
+ * @method     ChildPeopleQuery orderByEmail2($order = Criteria::ASC) Order by the email2 column
  * @method     ChildPeopleQuery orderByAddress($order = Criteria::ASC) Order by the address column
- * @method     ChildPeopleQuery orderByZipcode($order = Criteria::ASC) Order by the zipCode column
+ * @method     ChildPeopleQuery orderByZip($order = Criteria::ASC) Order by the zip column
  * @method     ChildPeopleQuery orderByCity($order = Criteria::ASC) Order by the city column
  * @method     ChildPeopleQuery orderByState($order = Criteria::ASC) Order by the state column
  * @method     ChildPeopleQuery orderByLatitude($order = Criteria::ASC) Order by the latitude column
  * @method     ChildPeopleQuery orderByLongitude($order = Criteria::ASC) Order by the longitude column
  * @method     ChildPeopleQuery orderByPhone($order = Criteria::ASC) Order by the phone column
  * @method     ChildPeopleQuery orderByLang($order = Criteria::ASC) Order by the lang column
- * @method     ChildPeopleQuery orderByMailinglist($order = Criteria::ASC) Order by the mailingList column
+ * @method     ChildPeopleQuery orderByMailinglist($order = Criteria::ASC) Order by the mailinglist column
  *
  * @method     ChildPeopleQuery groupById() Group by the id column
- * @method     ChildPeopleQuery groupByCuserid() Group by the cUserId column
- * @method     ChildPeopleQuery groupByMuserid() Group by the mUserId column
  * @method     ChildPeopleQuery groupByTitle() Group by the title column
- * @method     ChildPeopleQuery groupByLastname() Group by the lastName column
- * @method     ChildPeopleQuery groupByFirstname() Group by the firstName column
+ * @method     ChildPeopleQuery groupByLastname() Group by the lastname column
+ * @method     ChildPeopleQuery groupByFirstname() Group by the firstname column
  * @method     ChildPeopleQuery groupByEmail() Group by the email column
+ * @method     ChildPeopleQuery groupByEmail2() Group by the email2 column
  * @method     ChildPeopleQuery groupByAddress() Group by the address column
- * @method     ChildPeopleQuery groupByZipcode() Group by the zipCode column
+ * @method     ChildPeopleQuery groupByZip() Group by the zip column
  * @method     ChildPeopleQuery groupByCity() Group by the city column
  * @method     ChildPeopleQuery groupByState() Group by the state column
  * @method     ChildPeopleQuery groupByLatitude() Group by the latitude column
  * @method     ChildPeopleQuery groupByLongitude() Group by the longitude column
  * @method     ChildPeopleQuery groupByPhone() Group by the phone column
  * @method     ChildPeopleQuery groupByLang() Group by the lang column
- * @method     ChildPeopleQuery groupByMailinglist() Group by the mailingList column
+ * @method     ChildPeopleQuery groupByMailinglist() Group by the mailinglist column
  *
  * @method     ChildPeopleQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChildPeopleQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     ChildPeopleQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
- * @method     ChildPeopleQuery leftJoinUser($relationAlias = null) Adds a LEFT JOIN clause to the query using the User relation
- * @method     ChildPeopleQuery rightJoinUser($relationAlias = null) Adds a RIGHT JOIN clause to the query using the User relation
- * @method     ChildPeopleQuery innerJoinUser($relationAlias = null) Adds a INNER JOIN clause to the query using the User relation
+ * @method     ChildPeopleQuery leftJoinCustomer($relationAlias = null) Adds a LEFT JOIN clause to the query using the Customer relation
+ * @method     ChildPeopleQuery rightJoinCustomer($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Customer relation
+ * @method     ChildPeopleQuery innerJoinCustomer($relationAlias = null) Adds a INNER JOIN clause to the query using the Customer relation
  *
- * @method     \UserQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
+ * @method     \CustomerQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
  * @method     ChildPeople findOne(ConnectionInterface $con = null) Return the first ChildPeople matching the query
  * @method     ChildPeople findOneOrCreate(ConnectionInterface $con = null) Return the first ChildPeople matching the query, or a new ChildPeople object populated from the query conditions when no match is found
  *
  * @method     ChildPeople findOneById(int $id) Return the first ChildPeople filtered by the id column
- * @method     ChildPeople findOneByCuserid(int $cUserId) Return the first ChildPeople filtered by the cUserId column
- * @method     ChildPeople findOneByMuserid(int $mUserId) Return the first ChildPeople filtered by the mUserId column
  * @method     ChildPeople findOneByTitle(string $title) Return the first ChildPeople filtered by the title column
- * @method     ChildPeople findOneByLastname(string $lastName) Return the first ChildPeople filtered by the lastName column
- * @method     ChildPeople findOneByFirstname(string $firstName) Return the first ChildPeople filtered by the firstName column
+ * @method     ChildPeople findOneByLastname(string $lastname) Return the first ChildPeople filtered by the lastname column
+ * @method     ChildPeople findOneByFirstname(string $firstname) Return the first ChildPeople filtered by the firstname column
  * @method     ChildPeople findOneByEmail(string $email) Return the first ChildPeople filtered by the email column
+ * @method     ChildPeople findOneByEmail2(string $email2) Return the first ChildPeople filtered by the email2 column
  * @method     ChildPeople findOneByAddress(string $address) Return the first ChildPeople filtered by the address column
- * @method     ChildPeople findOneByZipcode(string $zipCode) Return the first ChildPeople filtered by the zipCode column
+ * @method     ChildPeople findOneByZip(string $zip) Return the first ChildPeople filtered by the zip column
  * @method     ChildPeople findOneByCity(string $city) Return the first ChildPeople filtered by the city column
  * @method     ChildPeople findOneByState(string $state) Return the first ChildPeople filtered by the state column
  * @method     ChildPeople findOneByLatitude(double $latitude) Return the first ChildPeople filtered by the latitude column
  * @method     ChildPeople findOneByLongitude(double $longitude) Return the first ChildPeople filtered by the longitude column
  * @method     ChildPeople findOneByPhone(string $phone) Return the first ChildPeople filtered by the phone column
  * @method     ChildPeople findOneByLang(string $lang) Return the first ChildPeople filtered by the lang column
- * @method     ChildPeople findOneByMailinglist(boolean $mailingList) Return the first ChildPeople filtered by the mailingList column *
+ * @method     ChildPeople findOneByMailinglist(boolean $mailinglist) Return the first ChildPeople filtered by the mailinglist column *
 
  * @method     ChildPeople requirePk($key, ConnectionInterface $con = null) Return the ChildPeople by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPeople requireOne(ConnectionInterface $con = null) Return the first ChildPeople matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildPeople requireOneById(int $id) Return the first ChildPeople filtered by the id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildPeople requireOneByCuserid(int $cUserId) Return the first ChildPeople filtered by the cUserId column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildPeople requireOneByMuserid(int $mUserId) Return the first ChildPeople filtered by the mUserId column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPeople requireOneByTitle(string $title) Return the first ChildPeople filtered by the title column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildPeople requireOneByLastname(string $lastName) Return the first ChildPeople filtered by the lastName column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildPeople requireOneByFirstname(string $firstName) Return the first ChildPeople filtered by the firstName column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPeople requireOneByLastname(string $lastname) Return the first ChildPeople filtered by the lastname column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPeople requireOneByFirstname(string $firstname) Return the first ChildPeople filtered by the firstname column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPeople requireOneByEmail(string $email) Return the first ChildPeople filtered by the email column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPeople requireOneByEmail2(string $email2) Return the first ChildPeople filtered by the email2 column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPeople requireOneByAddress(string $address) Return the first ChildPeople filtered by the address column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildPeople requireOneByZipcode(string $zipCode) Return the first ChildPeople filtered by the zipCode column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPeople requireOneByZip(string $zip) Return the first ChildPeople filtered by the zip column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPeople requireOneByCity(string $city) Return the first ChildPeople filtered by the city column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPeople requireOneByState(string $state) Return the first ChildPeople filtered by the state column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPeople requireOneByLatitude(double $latitude) Return the first ChildPeople filtered by the latitude column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPeople requireOneByLongitude(double $longitude) Return the first ChildPeople filtered by the longitude column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPeople requireOneByPhone(string $phone) Return the first ChildPeople filtered by the phone column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildPeople requireOneByLang(string $lang) Return the first ChildPeople filtered by the lang column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildPeople requireOneByMailinglist(boolean $mailingList) Return the first ChildPeople filtered by the mailingList column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildPeople requireOneByMailinglist(boolean $mailinglist) Return the first ChildPeople filtered by the mailinglist column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildPeople[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildPeople objects based on current ModelCriteria
  * @method     ChildPeople[]|ObjectCollection findById(int $id) Return ChildPeople objects filtered by the id column
- * @method     ChildPeople[]|ObjectCollection findByCuserid(int $cUserId) Return ChildPeople objects filtered by the cUserId column
- * @method     ChildPeople[]|ObjectCollection findByMuserid(int $mUserId) Return ChildPeople objects filtered by the mUserId column
  * @method     ChildPeople[]|ObjectCollection findByTitle(string $title) Return ChildPeople objects filtered by the title column
- * @method     ChildPeople[]|ObjectCollection findByLastname(string $lastName) Return ChildPeople objects filtered by the lastName column
- * @method     ChildPeople[]|ObjectCollection findByFirstname(string $firstName) Return ChildPeople objects filtered by the firstName column
+ * @method     ChildPeople[]|ObjectCollection findByLastname(string $lastname) Return ChildPeople objects filtered by the lastname column
+ * @method     ChildPeople[]|ObjectCollection findByFirstname(string $firstname) Return ChildPeople objects filtered by the firstname column
  * @method     ChildPeople[]|ObjectCollection findByEmail(string $email) Return ChildPeople objects filtered by the email column
+ * @method     ChildPeople[]|ObjectCollection findByEmail2(string $email2) Return ChildPeople objects filtered by the email2 column
  * @method     ChildPeople[]|ObjectCollection findByAddress(string $address) Return ChildPeople objects filtered by the address column
- * @method     ChildPeople[]|ObjectCollection findByZipcode(string $zipCode) Return ChildPeople objects filtered by the zipCode column
+ * @method     ChildPeople[]|ObjectCollection findByZip(string $zip) Return ChildPeople objects filtered by the zip column
  * @method     ChildPeople[]|ObjectCollection findByCity(string $city) Return ChildPeople objects filtered by the city column
  * @method     ChildPeople[]|ObjectCollection findByState(string $state) Return ChildPeople objects filtered by the state column
  * @method     ChildPeople[]|ObjectCollection findByLatitude(double $latitude) Return ChildPeople objects filtered by the latitude column
  * @method     ChildPeople[]|ObjectCollection findByLongitude(double $longitude) Return ChildPeople objects filtered by the longitude column
  * @method     ChildPeople[]|ObjectCollection findByPhone(string $phone) Return ChildPeople objects filtered by the phone column
  * @method     ChildPeople[]|ObjectCollection findByLang(string $lang) Return ChildPeople objects filtered by the lang column
- * @method     ChildPeople[]|ObjectCollection findByMailinglist(boolean $mailingList) Return ChildPeople objects filtered by the mailingList column
+ * @method     ChildPeople[]|ObjectCollection findByMailinglist(boolean $mailinglist) Return ChildPeople objects filtered by the mailinglist column
  * @method     ChildPeople[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
  */
@@ -213,7 +208,7 @@ abstract class PeopleQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, cUserId, mUserId, title, lastName, firstName, email, address, zipCode, city, state, latitude, longitude, phone, lang, mailingList FROM people WHERE id = :p0';
+        $sql = 'SELECT id, title, lastname, firstname, email, email2, address, zip, city, state, latitude, longitude, phone, lang, mailinglist FROM people WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -345,88 +340,6 @@ abstract class PeopleQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the cUserId column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByCuserid(1234); // WHERE cUserId = 1234
-     * $query->filterByCuserid(array(12, 34)); // WHERE cUserId IN (12, 34)
-     * $query->filterByCuserid(array('min' => 12)); // WHERE cUserId > 12
-     * </code>
-     *
-     * @param     mixed $cuserid The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return $this|ChildPeopleQuery The current query, for fluid interface
-     */
-    public function filterByCuserid($cuserid = null, $comparison = null)
-    {
-        if (is_array($cuserid)) {
-            $useMinMax = false;
-            if (isset($cuserid['min'])) {
-                $this->addUsingAlias(PeopleTableMap::COL_CUSERID, $cuserid['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($cuserid['max'])) {
-                $this->addUsingAlias(PeopleTableMap::COL_CUSERID, $cuserid['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(PeopleTableMap::COL_CUSERID, $cuserid, $comparison);
-    }
-
-    /**
-     * Filter the query on the mUserId column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByMuserid(1234); // WHERE mUserId = 1234
-     * $query->filterByMuserid(array(12, 34)); // WHERE mUserId IN (12, 34)
-     * $query->filterByMuserid(array('min' => 12)); // WHERE mUserId > 12
-     * </code>
-     *
-     * @param     mixed $muserid The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return $this|ChildPeopleQuery The current query, for fluid interface
-     */
-    public function filterByMuserid($muserid = null, $comparison = null)
-    {
-        if (is_array($muserid)) {
-            $useMinMax = false;
-            if (isset($muserid['min'])) {
-                $this->addUsingAlias(PeopleTableMap::COL_MUSERID, $muserid['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($muserid['max'])) {
-                $this->addUsingAlias(PeopleTableMap::COL_MUSERID, $muserid['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(PeopleTableMap::COL_MUSERID, $muserid, $comparison);
-    }
-
-    /**
      * Filter the query on the title column
      *
      * Example usage:
@@ -456,12 +369,12 @@ abstract class PeopleQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the lastName column
+     * Filter the query on the lastname column
      *
      * Example usage:
      * <code>
-     * $query->filterByLastname('fooValue');   // WHERE lastName = 'fooValue'
-     * $query->filterByLastname('%fooValue%'); // WHERE lastName LIKE '%fooValue%'
+     * $query->filterByLastname('fooValue');   // WHERE lastname = 'fooValue'
+     * $query->filterByLastname('%fooValue%'); // WHERE lastname LIKE '%fooValue%'
      * </code>
      *
      * @param     string $lastname The value to use as filter.
@@ -485,12 +398,12 @@ abstract class PeopleQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the firstName column
+     * Filter the query on the firstname column
      *
      * Example usage:
      * <code>
-     * $query->filterByFirstname('fooValue');   // WHERE firstName = 'fooValue'
-     * $query->filterByFirstname('%fooValue%'); // WHERE firstName LIKE '%fooValue%'
+     * $query->filterByFirstname('fooValue');   // WHERE firstname = 'fooValue'
+     * $query->filterByFirstname('%fooValue%'); // WHERE firstname LIKE '%fooValue%'
      * </code>
      *
      * @param     string $firstname The value to use as filter.
@@ -543,6 +456,35 @@ abstract class PeopleQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the email2 column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByEmail2('fooValue');   // WHERE email2 = 'fooValue'
+     * $query->filterByEmail2('%fooValue%'); // WHERE email2 LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $email2 The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildPeopleQuery The current query, for fluid interface
+     */
+    public function filterByEmail2($email2 = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($email2)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $email2)) {
+                $email2 = str_replace('*', '%', $email2);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(PeopleTableMap::COL_EMAIL2, $email2, $comparison);
+    }
+
+    /**
      * Filter the query on the address column
      *
      * Example usage:
@@ -572,32 +514,32 @@ abstract class PeopleQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the zipCode column
+     * Filter the query on the zip column
      *
      * Example usage:
      * <code>
-     * $query->filterByZipcode('fooValue');   // WHERE zipCode = 'fooValue'
-     * $query->filterByZipcode('%fooValue%'); // WHERE zipCode LIKE '%fooValue%'
+     * $query->filterByZip('fooValue');   // WHERE zip = 'fooValue'
+     * $query->filterByZip('%fooValue%'); // WHERE zip LIKE '%fooValue%'
      * </code>
      *
-     * @param     string $zipcode The value to use as filter.
+     * @param     string $zip The value to use as filter.
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return $this|ChildPeopleQuery The current query, for fluid interface
      */
-    public function filterByZipcode($zipcode = null, $comparison = null)
+    public function filterByZip($zip = null, $comparison = null)
     {
         if (null === $comparison) {
-            if (is_array($zipcode)) {
+            if (is_array($zip)) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $zipcode)) {
-                $zipcode = str_replace('*', '%', $zipcode);
+            } elseif (preg_match('/[\%\*]/', $zip)) {
+                $zip = str_replace('*', '%', $zip);
                 $comparison = Criteria::LIKE;
             }
         }
 
-        return $this->addUsingAlias(PeopleTableMap::COL_ZIPCODE, $zipcode, $comparison);
+        return $this->addUsingAlias(PeopleTableMap::COL_ZIP, $zip, $comparison);
     }
 
     /**
@@ -799,12 +741,12 @@ abstract class PeopleQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the mailingList column
+     * Filter the query on the mailinglist column
      *
      * Example usage:
      * <code>
-     * $query->filterByMailinglist(true); // WHERE mailingList = true
-     * $query->filterByMailinglist('yes'); // WHERE mailingList = true
+     * $query->filterByMailinglist(true); // WHERE mailinglist = true
+     * $query->filterByMailinglist('yes'); // WHERE mailinglist = true
      * </code>
      *
      * @param     boolean|string $mailinglist The value to use as filter.
@@ -826,40 +768,40 @@ abstract class PeopleQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related \User object
+     * Filter the query by a related \Customer object
      *
-     * @param \User|ObjectCollection $user  the related object to use as filter
+     * @param \Customer|ObjectCollection $customer the related object to use as filter
      * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return ChildPeopleQuery The current query, for fluid interface
      */
-    public function filterByUser($user, $comparison = null)
+    public function filterByCustomer($customer, $comparison = null)
     {
-        if ($user instanceof \User) {
+        if ($customer instanceof \Customer) {
             return $this
-                ->addUsingAlias(PeopleTableMap::COL_ID, $user->getId(), $comparison);
-        } elseif ($user instanceof ObjectCollection) {
+                ->addUsingAlias(PeopleTableMap::COL_ID, $customer->getId(), $comparison);
+        } elseif ($customer instanceof ObjectCollection) {
             return $this
-                ->useUserQuery()
-                ->filterByPrimaryKeys($user->getPrimaryKeys())
+                ->useCustomerQuery()
+                ->filterByPrimaryKeys($customer->getPrimaryKeys())
                 ->endUse();
         } else {
-            throw new PropelException('filterByUser() only accepts arguments of type \User or Collection');
+            throw new PropelException('filterByCustomer() only accepts arguments of type \Customer or Collection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the User relation
+     * Adds a JOIN clause to the query using the Customer relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return $this|ChildPeopleQuery The current query, for fluid interface
      */
-    public function joinUser($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinCustomer($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('User');
+        $relationMap = $tableMap->getRelation('Customer');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -874,14 +816,14 @@ abstract class PeopleQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'User');
+            $this->addJoinObject($join, 'Customer');
         }
 
         return $this;
     }
 
     /**
-     * Use the User relation User object
+     * Use the Customer relation Customer object
      *
      * @see useQuery()
      *
@@ -889,13 +831,13 @@ abstract class PeopleQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return \UserQuery A secondary query class using the current class as primary query
+     * @return \CustomerQuery A secondary query class using the current class as primary query
      */
-    public function useUserQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useCustomerQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinUser($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'User', '\UserQuery');
+            ->joinCustomer($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Customer', '\CustomerQuery');
     }
 
     /**

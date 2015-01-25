@@ -60,6 +60,6 @@ RUN chmod u+x /usr/local/bin/backend-register.bash
 ADD ./conf/start.init /etc/init.d/start
 RUN chmod u+x /etc/init.d/start
 
-EXPOSE 80 443
+#EXPOSE 80 443
 
 ENTRYPOINT ["/etc/init.d/start", "start"]

@@ -46,6 +46,17 @@
                                                                                     $app->config()->get("databases:$default_database:settings")
                                                                                 ) ) ;*/
                 break;
+                case "pgsql":
+                    $serviceContainer = Propel::getServiceContainer();
+                    $serviceContainer->setAdapterClass( 'pfw', 'pgsql' ) ;
+                    $manager = new ConnectionManagerSingle();
+                    $manager->setConfiguration( array(
+                      'dsn'      => $app->config()->get("databases:$default_database:dsn"),
+                      'user'     => $app->config()->get("databases:$default_database:username"),
+                      'password' => $app->config()->get("databases:$default_database:password"),
+                    ) ) ;
+                    $serviceContainer->setConnectionManager( 'pfw', $manager ) ;
+                break;
                 default:
                     throw new \Exception( "DB: Unsupported database type", 1 ) ;
                 break;

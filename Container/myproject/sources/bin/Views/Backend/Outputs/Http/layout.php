@@ -9,7 +9,7 @@
     <link rel="icon" href="/favicon.ico">
 
     <title><?php ( !isset( $title ) ? "Comivi SPF - Version ?" : "Comivi SPF | " . $title . " - Version ?" ) ?></title>
-    <link href="/plugins/bootstrap-v3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/css/backend.css" rel="stylesheet">
@@ -79,8 +79,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="/plugins/bootstrap-v3.3.1/dist/js/bootstrap.min.js"></script>
+    <script src="/vendor/bootstrap-3.3.2/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="/plugins/bootstrap-v3.3.1/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="/vendor/bootstrap-3.3.2/assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

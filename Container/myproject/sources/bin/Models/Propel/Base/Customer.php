@@ -2,13 +2,13 @@
 
 namespace Base;
 
+use \CustomerQuery as ChildCustomerQuery;
 use \People as ChildPeople;
 use \PeopleQuery as ChildPeopleQuery;
-use \UserQuery as ChildUserQuery;
 use \DateTime;
 use \Exception;
 use \PDO;
-use Map\UserTableMap;
+use Map\CustomerTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
@@ -23,18 +23,18 @@ use Propel\Runtime\Parser\AbstractParser;
 use Propel\Runtime\Util\PropelDateTime;
 
 /**
- * Base class that represents a row from the 'user' table.
+ * Base class that represents a row from the 'customer' table.
  *
  *
  *
 * @package    propel.generator..Base
 */
-abstract class User implements ActiveRecordInterface
+abstract class Customer implements ActiveRecordInterface
 {
     /**
      * TableMap class name
      */
-    const TABLE_MAP = '\\Map\\UserTableMap';
+    const TABLE_MAP = '\\Map\\CustomerTableMap';
 
 
     /**
@@ -119,7 +119,7 @@ abstract class User implements ActiveRecordInterface
     protected $alreadyInSave = false;
 
     /**
-     * Initializes internal state of Base\User object.
+     * Initializes internal state of Base\Customer object.
      */
     public function __construct()
     {
@@ -214,9 +214,9 @@ abstract class User implements ActiveRecordInterface
     }
 
     /**
-     * Compares this with another <code>User</code> instance.  If
-     * <code>obj</code> is an instance of <code>User</code>, delegates to
-     * <code>equals(User)</code>.  Otherwise, returns <code>false</code>.
+     * Compares this with another <code>Customer</code> instance.  If
+     * <code>obj</code> is an instance of <code>Customer</code>, delegates to
+     * <code>equals(Customer)</code>.  Otherwise, returns <code>false</code>.
      *
      * @param  mixed   $obj The object to compare to.
      * @return boolean Whether equal to the object specified.
@@ -282,7 +282,7 @@ abstract class User implements ActiveRecordInterface
      * @param string $name  The virtual column name
      * @param mixed  $value The value to give to the virtual column
      *
-     * @return $this|User The current object, for fluid interface
+     * @return $this|Customer The current object, for fluid interface
      */
     public function setVirtualColumn($name, $value)
     {
@@ -362,7 +362,7 @@ abstract class User implements ActiveRecordInterface
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *                            If format is NULL, then the raw DateTime object will be returned.
      *
-     * @return string|DateTime Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return string|DateTime Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      *
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
@@ -382,7 +382,7 @@ abstract class User implements ActiveRecordInterface
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *                            If format is NULL, then the raw DateTime object will be returned.
      *
-     * @return string|DateTime Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return string|DateTime Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      *
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
@@ -429,7 +429,7 @@ abstract class User implements ActiveRecordInterface
      * Set the value of [id] column.
      *
      * @param  int $v new value
-     * @return $this|\User The current object (for fluent API support)
+     * @return $this|\Customer The current object (for fluent API support)
      */
     public function setId($v)
     {
@@ -439,7 +439,7 @@ abstract class User implements ActiveRecordInterface
 
         if ($this->id !== $v) {
             $this->id = $v;
-            $this->modifiedColumns[UserTableMap::COL_ID] = true;
+            $this->modifiedColumns[CustomerTableMap::COL_ID] = true;
         }
 
         if ($this->aPeople !== null && $this->aPeople->getId() !== $v) {
@@ -453,7 +453,7 @@ abstract class User implements ActiveRecordInterface
      * Set the value of [password] column.
      *
      * @param  string $v new value
-     * @return $this|\User The current object (for fluent API support)
+     * @return $this|\Customer The current object (for fluent API support)
      */
     public function setPassword($v)
     {
@@ -463,7 +463,7 @@ abstract class User implements ActiveRecordInterface
 
         if ($this->password !== $v) {
             $this->password = $v;
-            $this->modifiedColumns[UserTableMap::COL_PASSWORD] = true;
+            $this->modifiedColumns[CustomerTableMap::COL_PASSWORD] = true;
         }
 
         return $this;
@@ -474,7 +474,7 @@ abstract class User implements ActiveRecordInterface
      *
      * @param  mixed $v string, integer (timestamp), or \DateTime value.
      *               Empty strings are treated as NULL.
-     * @return $this|\User The current object (for fluent API support)
+     * @return $this|\Customer The current object (for fluent API support)
      */
     public function setLastlogin($v)
     {
@@ -482,7 +482,7 @@ abstract class User implements ActiveRecordInterface
         if ($this->lastlogin !== null || $dt !== null) {
             if ($dt !== $this->lastlogin) {
                 $this->lastlogin = $dt;
-                $this->modifiedColumns[UserTableMap::COL_LASTLOGIN] = true;
+                $this->modifiedColumns[CustomerTableMap::COL_LASTLOGIN] = true;
             }
         } // if either are not null
 
@@ -494,7 +494,7 @@ abstract class User implements ActiveRecordInterface
      *
      * @param  mixed $v string, integer (timestamp), or \DateTime value.
      *               Empty strings are treated as NULL.
-     * @return $this|\User The current object (for fluent API support)
+     * @return $this|\Customer The current object (for fluent API support)
      */
     public function setLastaccess($v)
     {
@@ -502,7 +502,7 @@ abstract class User implements ActiveRecordInterface
         if ($this->lastaccess !== null || $dt !== null) {
             if ($dt !== $this->lastaccess) {
                 $this->lastaccess = $dt;
-                $this->modifiedColumns[UserTableMap::COL_LASTACCESS] = true;
+                $this->modifiedColumns[CustomerTableMap::COL_LASTACCESS] = true;
             }
         } // if either are not null
 
@@ -513,7 +513,7 @@ abstract class User implements ActiveRecordInterface
      * Set the value of [lastpage] column.
      *
      * @param  string $v new value
-     * @return $this|\User The current object (for fluent API support)
+     * @return $this|\Customer The current object (for fluent API support)
      */
     public function setLastpage($v)
     {
@@ -523,7 +523,7 @@ abstract class User implements ActiveRecordInterface
 
         if ($this->lastpage !== $v) {
             $this->lastpage = $v;
-            $this->modifiedColumns[UserTableMap::COL_LASTPAGE] = true;
+            $this->modifiedColumns[CustomerTableMap::COL_LASTPAGE] = true;
         }
 
         return $this;
@@ -533,7 +533,7 @@ abstract class User implements ActiveRecordInterface
      * Set the value of [lastip] column.
      *
      * @param  string $v new value
-     * @return $this|\User The current object (for fluent API support)
+     * @return $this|\Customer The current object (for fluent API support)
      */
     public function setLastip($v)
     {
@@ -543,7 +543,7 @@ abstract class User implements ActiveRecordInterface
 
         if ($this->lastip !== $v) {
             $this->lastip = $v;
-            $this->modifiedColumns[UserTableMap::COL_LASTIP] = true;
+            $this->modifiedColumns[CustomerTableMap::COL_LASTIP] = true;
         }
 
         return $this;
@@ -553,7 +553,7 @@ abstract class User implements ActiveRecordInterface
      * Set the value of [status] column.
      *
      * @param  int $v new value
-     * @return $this|\User The current object (for fluent API support)
+     * @return $this|\Customer The current object (for fluent API support)
      */
     public function setStatus($v)
     {
@@ -563,7 +563,7 @@ abstract class User implements ActiveRecordInterface
 
         if ($this->status !== $v) {
             $this->status = $v;
-            $this->modifiedColumns[UserTableMap::COL_STATUS] = true;
+            $this->modifiedColumns[CustomerTableMap::COL_STATUS] = true;
         }
 
         return $this;
@@ -605,31 +605,25 @@ abstract class User implements ActiveRecordInterface
     {
         try {
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 0 + $startcol : UserTableMap::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 0 + $startcol : CustomerTableMap::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)];
             $this->id = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : UserTableMap::translateFieldName('Password', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : CustomerTableMap::translateFieldName('Password', TableMap::TYPE_PHPNAME, $indexType)];
             $this->password = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : UserTableMap::translateFieldName('Lastlogin', TableMap::TYPE_PHPNAME, $indexType)];
-            if ($col === '0000-00-00 00:00:00') {
-                $col = null;
-            }
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : CustomerTableMap::translateFieldName('Lastlogin', TableMap::TYPE_PHPNAME, $indexType)];
             $this->lastlogin = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : UserTableMap::translateFieldName('Lastaccess', TableMap::TYPE_PHPNAME, $indexType)];
-            if ($col === '0000-00-00 00:00:00') {
-                $col = null;
-            }
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : CustomerTableMap::translateFieldName('Lastaccess', TableMap::TYPE_PHPNAME, $indexType)];
             $this->lastaccess = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : UserTableMap::translateFieldName('Lastpage', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : CustomerTableMap::translateFieldName('Lastpage', TableMap::TYPE_PHPNAME, $indexType)];
             $this->lastpage = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : UserTableMap::translateFieldName('Lastip', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : CustomerTableMap::translateFieldName('Lastip', TableMap::TYPE_PHPNAME, $indexType)];
             $this->lastip = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : UserTableMap::translateFieldName('Status', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : CustomerTableMap::translateFieldName('Status', TableMap::TYPE_PHPNAME, $indexType)];
             $this->status = (null !== $col) ? (int) $col : null;
             $this->resetModified();
 
@@ -639,10 +633,10 @@ abstract class User implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 7; // 7 = UserTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 7; // 7 = CustomerTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException(sprintf('Error populating %s object', '\\User'), 0, $e);
+            throw new PropelException(sprintf('Error populating %s object', '\\Customer'), 0, $e);
         }
     }
 
@@ -687,13 +681,13 @@ abstract class User implements ActiveRecordInterface
         }
 
         if ($con === null) {
-            $con = Propel::getServiceContainer()->getReadConnection(UserTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getReadConnection(CustomerTableMap::DATABASE_NAME);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $dataFetcher = ChildUserQuery::create(null, $this->buildPkeyCriteria())->setFormatter(ModelCriteria::FORMAT_STATEMENT)->find($con);
+        $dataFetcher = ChildCustomerQuery::create(null, $this->buildPkeyCriteria())->setFormatter(ModelCriteria::FORMAT_STATEMENT)->find($con);
         $row = $dataFetcher->fetch();
         $dataFetcher->close();
         if (!$row) {
@@ -713,8 +707,8 @@ abstract class User implements ActiveRecordInterface
      * @param      ConnectionInterface $con
      * @return void
      * @throws PropelException
-     * @see User::setDeleted()
-     * @see User::isDeleted()
+     * @see Customer::setDeleted()
+     * @see Customer::isDeleted()
      */
     public function delete(ConnectionInterface $con = null)
     {
@@ -723,11 +717,11 @@ abstract class User implements ActiveRecordInterface
         }
 
         if ($con === null) {
-            $con = Propel::getServiceContainer()->getWriteConnection(UserTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(CustomerTableMap::DATABASE_NAME);
         }
 
         $con->transaction(function () use ($con) {
-            $deleteQuery = ChildUserQuery::create()
+            $deleteQuery = ChildCustomerQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
             if ($ret) {
@@ -758,7 +752,7 @@ abstract class User implements ActiveRecordInterface
         }
 
         if ($con === null) {
-            $con = Propel::getServiceContainer()->getWriteConnection(UserTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(CustomerTableMap::DATABASE_NAME);
         }
 
         return $con->transaction(function () use ($con) {
@@ -777,7 +771,7 @@ abstract class User implements ActiveRecordInterface
                     $this->postUpdate($con);
                 }
                 $this->postSave($con);
-                UserTableMap::addInstanceToPool($this);
+                CustomerTableMap::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -848,30 +842,30 @@ abstract class User implements ActiveRecordInterface
 
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(UserTableMap::COL_ID)) {
+        if ($this->isColumnModified(CustomerTableMap::COL_ID)) {
             $modifiedColumns[':p' . $index++]  = 'id';
         }
-        if ($this->isColumnModified(UserTableMap::COL_PASSWORD)) {
+        if ($this->isColumnModified(CustomerTableMap::COL_PASSWORD)) {
             $modifiedColumns[':p' . $index++]  = 'password';
         }
-        if ($this->isColumnModified(UserTableMap::COL_LASTLOGIN)) {
-            $modifiedColumns[':p' . $index++]  = 'lastLogin';
+        if ($this->isColumnModified(CustomerTableMap::COL_LASTLOGIN)) {
+            $modifiedColumns[':p' . $index++]  = 'lastlogin';
         }
-        if ($this->isColumnModified(UserTableMap::COL_LASTACCESS)) {
-            $modifiedColumns[':p' . $index++]  = 'lastAccess';
+        if ($this->isColumnModified(CustomerTableMap::COL_LASTACCESS)) {
+            $modifiedColumns[':p' . $index++]  = 'lastaccess';
         }
-        if ($this->isColumnModified(UserTableMap::COL_LASTPAGE)) {
-            $modifiedColumns[':p' . $index++]  = 'lastPage';
+        if ($this->isColumnModified(CustomerTableMap::COL_LASTPAGE)) {
+            $modifiedColumns[':p' . $index++]  = 'lastpage';
         }
-        if ($this->isColumnModified(UserTableMap::COL_LASTIP)) {
-            $modifiedColumns[':p' . $index++]  = 'lastIp';
+        if ($this->isColumnModified(CustomerTableMap::COL_LASTIP)) {
+            $modifiedColumns[':p' . $index++]  = 'lastip';
         }
-        if ($this->isColumnModified(UserTableMap::COL_STATUS)) {
+        if ($this->isColumnModified(CustomerTableMap::COL_STATUS)) {
             $modifiedColumns[':p' . $index++]  = 'status';
         }
 
         $sql = sprintf(
-            'INSERT INTO user (%s) VALUES (%s)',
+            'INSERT INTO customer (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -886,16 +880,16 @@ abstract class User implements ActiveRecordInterface
                     case 'password':
                         $stmt->bindValue($identifier, $this->password, PDO::PARAM_STR);
                         break;
-                    case 'lastLogin':
+                    case 'lastlogin':
                         $stmt->bindValue($identifier, $this->lastlogin ? $this->lastlogin->format("Y-m-d H:i:s") : null, PDO::PARAM_STR);
                         break;
-                    case 'lastAccess':
+                    case 'lastaccess':
                         $stmt->bindValue($identifier, $this->lastaccess ? $this->lastaccess->format("Y-m-d H:i:s") : null, PDO::PARAM_STR);
                         break;
-                    case 'lastPage':
+                    case 'lastpage':
                         $stmt->bindValue($identifier, $this->lastpage, PDO::PARAM_STR);
                         break;
-                    case 'lastIp':
+                    case 'lastip':
                         $stmt->bindValue($identifier, $this->lastip, PDO::PARAM_STR);
                         break;
                     case 'status':
@@ -940,7 +934,7 @@ abstract class User implements ActiveRecordInterface
      */
     public function getByName($name, $type = TableMap::TYPE_PHPNAME)
     {
-        $pos = UserTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
+        $pos = CustomerTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -1001,11 +995,11 @@ abstract class User implements ActiveRecordInterface
     public function toArray($keyType = TableMap::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
 
-        if (isset($alreadyDumpedObjects['User'][$this->hashCode()])) {
+        if (isset($alreadyDumpedObjects['Customer'][$this->hashCode()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['User'][$this->hashCode()] = true;
-        $keys = UserTableMap::getFieldNames($keyType);
+        $alreadyDumpedObjects['Customer'][$this->hashCode()] = true;
+        $keys = CustomerTableMap::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getId(),
             $keys[1] => $this->getPassword(),
@@ -1015,6 +1009,20 @@ abstract class User implements ActiveRecordInterface
             $keys[5] => $this->getLastip(),
             $keys[6] => $this->getStatus(),
         );
+
+        $utc = new \DateTimeZone('utc');
+        if ($result[$keys[2]] instanceof \DateTime) {
+            // When changing timezone we don't want to change existing instances
+            $dateTime = clone $result[$keys[2]];
+            $result[$keys[2]] = $dateTime->setTimezone($utc)->format('Y-m-d\TH:i:s\Z');
+        }
+
+        if ($result[$keys[3]] instanceof \DateTime) {
+            // When changing timezone we don't want to change existing instances
+            $dateTime = clone $result[$keys[3]];
+            $result[$keys[3]] = $dateTime->setTimezone($utc)->format('Y-m-d\TH:i:s\Z');
+        }
+
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
             $result[$key] = $virtualColumn;
@@ -1050,11 +1058,11 @@ abstract class User implements ActiveRecordInterface
      *                one of the class type constants TableMap::TYPE_PHPNAME, TableMap::TYPE_CAMELNAME
      *                TableMap::TYPE_COLNAME, TableMap::TYPE_FIELDNAME, TableMap::TYPE_NUM.
      *                Defaults to TableMap::TYPE_PHPNAME.
-     * @return $this|\User
+     * @return $this|\Customer
      */
     public function setByName($name, $value, $type = TableMap::TYPE_PHPNAME)
     {
-        $pos = UserTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
+        $pos = CustomerTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
 
         return $this->setByPosition($pos, $value);
     }
@@ -1065,7 +1073,7 @@ abstract class User implements ActiveRecordInterface
      *
      * @param  int $pos position in xml schema
      * @param  mixed $value field value
-     * @return $this|\User
+     * @return $this|\Customer
      */
     public function setByPosition($pos, $value)
     {
@@ -1115,7 +1123,7 @@ abstract class User implements ActiveRecordInterface
      */
     public function fromArray($arr, $keyType = TableMap::TYPE_PHPNAME)
     {
-        $keys = UserTableMap::getFieldNames($keyType);
+        $keys = CustomerTableMap::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) {
             $this->setId($arr[$keys[0]]);
@@ -1157,7 +1165,7 @@ abstract class User implements ActiveRecordInterface
      * @param string $data The source data to import from
      * @param string $keyType The type of keys the array uses.
      *
-     * @return $this|\User The current object, for fluid interface
+     * @return $this|\Customer The current object, for fluid interface
      */
     public function importFrom($parser, $data, $keyType = TableMap::TYPE_PHPNAME)
     {
@@ -1177,28 +1185,28 @@ abstract class User implements ActiveRecordInterface
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(UserTableMap::DATABASE_NAME);
+        $criteria = new Criteria(CustomerTableMap::DATABASE_NAME);
 
-        if ($this->isColumnModified(UserTableMap::COL_ID)) {
-            $criteria->add(UserTableMap::COL_ID, $this->id);
+        if ($this->isColumnModified(CustomerTableMap::COL_ID)) {
+            $criteria->add(CustomerTableMap::COL_ID, $this->id);
         }
-        if ($this->isColumnModified(UserTableMap::COL_PASSWORD)) {
-            $criteria->add(UserTableMap::COL_PASSWORD, $this->password);
+        if ($this->isColumnModified(CustomerTableMap::COL_PASSWORD)) {
+            $criteria->add(CustomerTableMap::COL_PASSWORD, $this->password);
         }
-        if ($this->isColumnModified(UserTableMap::COL_LASTLOGIN)) {
-            $criteria->add(UserTableMap::COL_LASTLOGIN, $this->lastlogin);
+        if ($this->isColumnModified(CustomerTableMap::COL_LASTLOGIN)) {
+            $criteria->add(CustomerTableMap::COL_LASTLOGIN, $this->lastlogin);
         }
-        if ($this->isColumnModified(UserTableMap::COL_LASTACCESS)) {
-            $criteria->add(UserTableMap::COL_LASTACCESS, $this->lastaccess);
+        if ($this->isColumnModified(CustomerTableMap::COL_LASTACCESS)) {
+            $criteria->add(CustomerTableMap::COL_LASTACCESS, $this->lastaccess);
         }
-        if ($this->isColumnModified(UserTableMap::COL_LASTPAGE)) {
-            $criteria->add(UserTableMap::COL_LASTPAGE, $this->lastpage);
+        if ($this->isColumnModified(CustomerTableMap::COL_LASTPAGE)) {
+            $criteria->add(CustomerTableMap::COL_LASTPAGE, $this->lastpage);
         }
-        if ($this->isColumnModified(UserTableMap::COL_LASTIP)) {
-            $criteria->add(UserTableMap::COL_LASTIP, $this->lastip);
+        if ($this->isColumnModified(CustomerTableMap::COL_LASTIP)) {
+            $criteria->add(CustomerTableMap::COL_LASTIP, $this->lastip);
         }
-        if ($this->isColumnModified(UserTableMap::COL_STATUS)) {
-            $criteria->add(UserTableMap::COL_STATUS, $this->status);
+        if ($this->isColumnModified(CustomerTableMap::COL_STATUS)) {
+            $criteria->add(CustomerTableMap::COL_STATUS, $this->status);
         }
 
         return $criteria;
@@ -1216,8 +1224,8 @@ abstract class User implements ActiveRecordInterface
      */
     public function buildPkeyCriteria()
     {
-        $criteria = ChildUserQuery::create();
-        $criteria->add(UserTableMap::COL_ID, $this->id);
+        $criteria = ChildCustomerQuery::create();
+        $criteria->add(CustomerTableMap::COL_ID, $this->id);
 
         return $criteria;
     }
@@ -1235,7 +1243,7 @@ abstract class User implements ActiveRecordInterface
         $validPrimaryKeyFKs = 1;
         $primaryKeyFKs = [];
 
-        //relation user_fk_457c99 to table people
+        //relation customer_fk_457c99 to table people
         if ($this->aPeople && $hash = spl_object_hash($this->aPeople)) {
             $primaryKeyFKs[] = $hash;
         } else {
@@ -1286,7 +1294,7 @@ abstract class User implements ActiveRecordInterface
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param      object $copyObj An object of \User (or compatible) type.
+     * @param      object $copyObj An object of \Customer (or compatible) type.
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
@@ -1314,7 +1322,7 @@ abstract class User implements ActiveRecordInterface
      * objects.
      *
      * @param  boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return \User Clone of current object.
+     * @return \Customer Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -1331,7 +1339,7 @@ abstract class User implements ActiveRecordInterface
      * Declares an association between this object and a ChildPeople object.
      *
      * @param  ChildPeople $v
-     * @return $this|\User The current object (for fluent API support)
+     * @return $this|\Customer The current object (for fluent API support)
      * @throws PropelException
      */
     public function setPeople(ChildPeople $v = null)
@@ -1346,7 +1354,7 @@ abstract class User implements ActiveRecordInterface
 
         // Add binding for other direction of this 1:1 relationship.
         if ($v !== null) {
-            $v->setUser($this);
+            $v->setCustomer($this);
         }
 
 
@@ -1366,7 +1374,7 @@ abstract class User implements ActiveRecordInterface
         if ($this->aPeople === null && ($this->id !== null)) {
             $this->aPeople = ChildPeopleQuery::create()->findPk($this->id, $con);
             // Because this foreign key represents a one-to-one relationship, we will create a bi-directional association.
-            $this->aPeople->setUser($this);
+            $this->aPeople->setCustomer($this);
         }
 
         return $this->aPeople;
@@ -1380,7 +1388,7 @@ abstract class User implements ActiveRecordInterface
     public function clear()
     {
         if (null !== $this->aPeople) {
-            $this->aPeople->removeUser($this);
+            $this->aPeople->removeCustomer($this);
         }
         $this->id = null;
         $this->password = null;
@@ -1419,7 +1427,7 @@ abstract class User implements ActiveRecordInterface
      */
     public function __toString()
     {
-        return (string) $this->exportTo(UserTableMap::DEFAULT_STRING_FORMAT);
+        return (string) $this->exportTo(CustomerTableMap::DEFAULT_STRING_FORMAT);
     }
 
     /**

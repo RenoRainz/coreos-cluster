@@ -5,10 +5,10 @@
     {
         public function getController( $type )
         {
-            if( $this->app->httpRequest()->requestURI() != "/api/users" )
-                return new \Controllers\Backend\UserController( $this->app, 'User', 'index' ) ;
+            if( $this->app->httpRequest()->requestURI() != "/api/customers" )
+                return new \Controllers\Backend\CustomerController( $this->app, 'Customer', 'index' ) ;
             else
-                return new \Controllers\Backend\UserController( $this->app, 'User', 'api' ) ;
+                return new \Controllers\Backend\CustomerController( $this->app, 'Customer', 'api' ) ;
 
             if( $type != 'job' )
             {

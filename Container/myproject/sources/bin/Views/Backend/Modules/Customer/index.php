@@ -1,20 +1,22 @@
-<h1>Users</h1>
+<h1>Customers</h1>
 <?php
-if( count( $users ) > 0 )
+if( count( $customers ) > 0 )
 {
   ?>
   <table class="table table-small table-bordered">
     <thead>
       <th>Name</th>
       <th>Email</th>
+      <th>Email2</th>
     </thead>
     <?php
-    foreach( $users as $user )
+    foreach( $customers as $customer )
     {
       ?>
       <tr>
-        <td><?= $user->getFirstName() . " " . $user->getLastName() ?></td>
-        <td><?= $user->getEmail() ?></td>
+        <td><?= $customer->getFirstname() . " " . $customer->getLastname() ?></td>
+        <td><?= $customer->getEmail() ?></td>
+        <td><?= $customer->getEmail2() ?></td>
       </tr>
       <?php
     }

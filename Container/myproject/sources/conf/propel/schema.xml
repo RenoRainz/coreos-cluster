@@ -2,29 +2,28 @@
 <database name="pfw" defaultIdMethod="native">
   <table name="people" phpName="People">
     <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
-    <column name="cUserId" type="integer" />
-    <column name="mUserId" type="integer" />
     <column name="title" type="varchar" size="4" />
-    <column name="lastName" type="varchar" size="100" />
-    <column name="firstName" type="varchar" size="100" />
+    <column name="lastname" type="varchar" size="100" />
+    <column name="firstname" type="varchar" size="100" />
     <column name="email" type="varchar" size="255" />
+    <column name="email2" type="varchar" size="255" />
     <column name="address" type="varchar" size="400" />
-    <column name="zipCode" type="varchar" size="5" />
+    <column name="zip" type="varchar" size="5" />
     <column name="city" type="varchar" size="200" />
     <column name="state" type="varchar" size="100" />
     <column name="latitude" type="float" />
     <column name="longitude" type="float" />
     <column name="phone" type="varchar" size="10" />
     <column name="lang" type="varchar" size="6" />
-    <column name="mailingList" type="boolean" />
+    <column name="mailinglist" type="boolean" />
   </table>
-  <table name="user" phpName="User">
+  <table name="customer" phpName="Customer">
     <column name="id" type="integer" primaryKey="true" />
     <column name="password" type="varchar" size="256" />
-    <column name="lastLogin" type="timestamp" />
-    <column name="lastAccess" type="timestamp" />
-    <column name="lastPage" type="varchar" size="512" />
-    <column name="lastIp" type="varchar" size="15" />
+    <column name="lastlogin" type="timestamp" />
+    <column name="lastaccess" type="timestamp" />
+    <column name="lastpage" type="varchar" size="512" />
+    <column name="lastip" type="varchar" size="15" />
     <column name="status" type="integer" />
     <foreign-key foreignTable="people" onDelete="cascade">
       <reference local="id" foreign="id" />

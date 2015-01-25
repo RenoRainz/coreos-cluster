@@ -59,7 +59,7 @@ class PeopleTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 16;
+    const NUM_COLUMNS = 15;
 
     /**
      * The number of lazy-loaded columns
@@ -69,7 +69,7 @@ class PeopleTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 16;
+    const NUM_HYDRATE_COLUMNS = 15;
 
     /**
      * the column name for the id field
@@ -77,29 +77,19 @@ class PeopleTableMap extends TableMap
     const COL_ID = 'people.id';
 
     /**
-     * the column name for the cUserId field
-     */
-    const COL_CUSERID = 'people.cUserId';
-
-    /**
-     * the column name for the mUserId field
-     */
-    const COL_MUSERID = 'people.mUserId';
-
-    /**
      * the column name for the title field
      */
     const COL_TITLE = 'people.title';
 
     /**
-     * the column name for the lastName field
+     * the column name for the lastname field
      */
-    const COL_LASTNAME = 'people.lastName';
+    const COL_LASTNAME = 'people.lastname';
 
     /**
-     * the column name for the firstName field
+     * the column name for the firstname field
      */
-    const COL_FIRSTNAME = 'people.firstName';
+    const COL_FIRSTNAME = 'people.firstname';
 
     /**
      * the column name for the email field
@@ -107,14 +97,19 @@ class PeopleTableMap extends TableMap
     const COL_EMAIL = 'people.email';
 
     /**
+     * the column name for the email2 field
+     */
+    const COL_EMAIL2 = 'people.email2';
+
+    /**
      * the column name for the address field
      */
     const COL_ADDRESS = 'people.address';
 
     /**
-     * the column name for the zipCode field
+     * the column name for the zip field
      */
-    const COL_ZIPCODE = 'people.zipCode';
+    const COL_ZIP = 'people.zip';
 
     /**
      * the column name for the city field
@@ -147,9 +142,9 @@ class PeopleTableMap extends TableMap
     const COL_LANG = 'people.lang';
 
     /**
-     * the column name for the mailingList field
+     * the column name for the mailinglist field
      */
-    const COL_MAILINGLIST = 'people.mailingList';
+    const COL_MAILINGLIST = 'people.mailinglist';
 
     /**
      * The default string format for model objects of the related table
@@ -163,11 +158,11 @@ class PeopleTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'Cuserid', 'Muserid', 'Title', 'Lastname', 'Firstname', 'Email', 'Address', 'Zipcode', 'City', 'State', 'Latitude', 'Longitude', 'Phone', 'Lang', 'Mailinglist', ),
-        self::TYPE_CAMELNAME     => array('id', 'cuserid', 'muserid', 'title', 'lastname', 'firstname', 'email', 'address', 'zipcode', 'city', 'state', 'latitude', 'longitude', 'phone', 'lang', 'mailinglist', ),
-        self::TYPE_COLNAME       => array(PeopleTableMap::COL_ID, PeopleTableMap::COL_CUSERID, PeopleTableMap::COL_MUSERID, PeopleTableMap::COL_TITLE, PeopleTableMap::COL_LASTNAME, PeopleTableMap::COL_FIRSTNAME, PeopleTableMap::COL_EMAIL, PeopleTableMap::COL_ADDRESS, PeopleTableMap::COL_ZIPCODE, PeopleTableMap::COL_CITY, PeopleTableMap::COL_STATE, PeopleTableMap::COL_LATITUDE, PeopleTableMap::COL_LONGITUDE, PeopleTableMap::COL_PHONE, PeopleTableMap::COL_LANG, PeopleTableMap::COL_MAILINGLIST, ),
-        self::TYPE_FIELDNAME     => array('id', 'cUserId', 'mUserId', 'title', 'lastName', 'firstName', 'email', 'address', 'zipCode', 'city', 'state', 'latitude', 'longitude', 'phone', 'lang', 'mailingList', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+        self::TYPE_PHPNAME       => array('Id', 'Title', 'Lastname', 'Firstname', 'Email', 'Email2', 'Address', 'Zip', 'City', 'State', 'Latitude', 'Longitude', 'Phone', 'Lang', 'Mailinglist', ),
+        self::TYPE_CAMELNAME     => array('id', 'title', 'lastname', 'firstname', 'email', 'email2', 'address', 'zip', 'city', 'state', 'latitude', 'longitude', 'phone', 'lang', 'mailinglist', ),
+        self::TYPE_COLNAME       => array(PeopleTableMap::COL_ID, PeopleTableMap::COL_TITLE, PeopleTableMap::COL_LASTNAME, PeopleTableMap::COL_FIRSTNAME, PeopleTableMap::COL_EMAIL, PeopleTableMap::COL_EMAIL2, PeopleTableMap::COL_ADDRESS, PeopleTableMap::COL_ZIP, PeopleTableMap::COL_CITY, PeopleTableMap::COL_STATE, PeopleTableMap::COL_LATITUDE, PeopleTableMap::COL_LONGITUDE, PeopleTableMap::COL_PHONE, PeopleTableMap::COL_LANG, PeopleTableMap::COL_MAILINGLIST, ),
+        self::TYPE_FIELDNAME     => array('id', 'title', 'lastname', 'firstname', 'email', 'email2', 'address', 'zip', 'city', 'state', 'latitude', 'longitude', 'phone', 'lang', 'mailinglist', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
     );
 
     /**
@@ -177,11 +172,11 @@ class PeopleTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'Cuserid' => 1, 'Muserid' => 2, 'Title' => 3, 'Lastname' => 4, 'Firstname' => 5, 'Email' => 6, 'Address' => 7, 'Zipcode' => 8, 'City' => 9, 'State' => 10, 'Latitude' => 11, 'Longitude' => 12, 'Phone' => 13, 'Lang' => 14, 'Mailinglist' => 15, ),
-        self::TYPE_CAMELNAME     => array('id' => 0, 'cuserid' => 1, 'muserid' => 2, 'title' => 3, 'lastname' => 4, 'firstname' => 5, 'email' => 6, 'address' => 7, 'zipcode' => 8, 'city' => 9, 'state' => 10, 'latitude' => 11, 'longitude' => 12, 'phone' => 13, 'lang' => 14, 'mailinglist' => 15, ),
-        self::TYPE_COLNAME       => array(PeopleTableMap::COL_ID => 0, PeopleTableMap::COL_CUSERID => 1, PeopleTableMap::COL_MUSERID => 2, PeopleTableMap::COL_TITLE => 3, PeopleTableMap::COL_LASTNAME => 4, PeopleTableMap::COL_FIRSTNAME => 5, PeopleTableMap::COL_EMAIL => 6, PeopleTableMap::COL_ADDRESS => 7, PeopleTableMap::COL_ZIPCODE => 8, PeopleTableMap::COL_CITY => 9, PeopleTableMap::COL_STATE => 10, PeopleTableMap::COL_LATITUDE => 11, PeopleTableMap::COL_LONGITUDE => 12, PeopleTableMap::COL_PHONE => 13, PeopleTableMap::COL_LANG => 14, PeopleTableMap::COL_MAILINGLIST => 15, ),
-        self::TYPE_FIELDNAME     => array('id' => 0, 'cUserId' => 1, 'mUserId' => 2, 'title' => 3, 'lastName' => 4, 'firstName' => 5, 'email' => 6, 'address' => 7, 'zipCode' => 8, 'city' => 9, 'state' => 10, 'latitude' => 11, 'longitude' => 12, 'phone' => 13, 'lang' => 14, 'mailingList' => 15, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+        self::TYPE_PHPNAME       => array('Id' => 0, 'Title' => 1, 'Lastname' => 2, 'Firstname' => 3, 'Email' => 4, 'Email2' => 5, 'Address' => 6, 'Zip' => 7, 'City' => 8, 'State' => 9, 'Latitude' => 10, 'Longitude' => 11, 'Phone' => 12, 'Lang' => 13, 'Mailinglist' => 14, ),
+        self::TYPE_CAMELNAME     => array('id' => 0, 'title' => 1, 'lastname' => 2, 'firstname' => 3, 'email' => 4, 'email2' => 5, 'address' => 6, 'zip' => 7, 'city' => 8, 'state' => 9, 'latitude' => 10, 'longitude' => 11, 'phone' => 12, 'lang' => 13, 'mailinglist' => 14, ),
+        self::TYPE_COLNAME       => array(PeopleTableMap::COL_ID => 0, PeopleTableMap::COL_TITLE => 1, PeopleTableMap::COL_LASTNAME => 2, PeopleTableMap::COL_FIRSTNAME => 3, PeopleTableMap::COL_EMAIL => 4, PeopleTableMap::COL_EMAIL2 => 5, PeopleTableMap::COL_ADDRESS => 6, PeopleTableMap::COL_ZIP => 7, PeopleTableMap::COL_CITY => 8, PeopleTableMap::COL_STATE => 9, PeopleTableMap::COL_LATITUDE => 10, PeopleTableMap::COL_LONGITUDE => 11, PeopleTableMap::COL_PHONE => 12, PeopleTableMap::COL_LANG => 13, PeopleTableMap::COL_MAILINGLIST => 14, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'title' => 1, 'lastname' => 2, 'firstname' => 3, 'email' => 4, 'email2' => 5, 'address' => 6, 'zip' => 7, 'city' => 8, 'state' => 9, 'latitude' => 10, 'longitude' => 11, 'phone' => 12, 'lang' => 13, 'mailinglist' => 14, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
     );
 
     /**
@@ -200,23 +195,23 @@ class PeopleTableMap extends TableMap
         $this->setClassName('\\People');
         $this->setPackage('');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('people_id_seq');
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
-        $this->addColumn('cUserId', 'Cuserid', 'INTEGER', false, null, null);
-        $this->addColumn('mUserId', 'Muserid', 'INTEGER', false, null, null);
         $this->addColumn('title', 'Title', 'VARCHAR', false, 4, null);
-        $this->addColumn('lastName', 'Lastname', 'VARCHAR', false, 100, null);
-        $this->addColumn('firstName', 'Firstname', 'VARCHAR', false, 100, null);
+        $this->addColumn('lastname', 'Lastname', 'VARCHAR', false, 100, null);
+        $this->addColumn('firstname', 'Firstname', 'VARCHAR', false, 100, null);
         $this->addColumn('email', 'Email', 'VARCHAR', false, 255, null);
+        $this->addColumn('email2', 'Email2', 'VARCHAR', false, 255, null);
         $this->addColumn('address', 'Address', 'VARCHAR', false, 400, null);
-        $this->addColumn('zipCode', 'Zipcode', 'VARCHAR', false, 5, null);
+        $this->addColumn('zip', 'Zip', 'VARCHAR', false, 5, null);
         $this->addColumn('city', 'City', 'VARCHAR', false, 200, null);
         $this->addColumn('state', 'State', 'VARCHAR', false, 100, null);
         $this->addColumn('latitude', 'Latitude', 'FLOAT', false, null, null);
         $this->addColumn('longitude', 'Longitude', 'FLOAT', false, null, null);
         $this->addColumn('phone', 'Phone', 'VARCHAR', false, 10, null);
         $this->addColumn('lang', 'Lang', 'VARCHAR', false, 6, null);
-        $this->addColumn('mailingList', 'Mailinglist', 'BOOLEAN', false, 1, null);
+        $this->addColumn('mailinglist', 'Mailinglist', 'BOOLEAN', false, null, null);
     } // initialize()
 
     /**
@@ -224,7 +219,13 @@ class PeopleTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('User', '\\User', RelationMap::ONE_TO_ONE, array('id' => 'id', ), 'CASCADE', null);
+        $this->addRelation('Customer', '\\Customer', RelationMap::ONE_TO_ONE, array (
+  0 =>
+  array (
+    0 => ':id',
+    1 => ':id',
+  ),
+), 'CASCADE', null, null, false);
     } // buildRelations()
     /**
      * Method to invalidate the instance pool of all tables related to people     * by a foreign key with ON DELETE CASCADE
@@ -233,7 +234,7 @@ class PeopleTableMap extends TableMap
     {
         // Invalidate objects in related instance pools,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
-        UserTableMap::clearInstancePool();
+        CustomerTableMap::clearInstancePool();
     }
 
     /**
@@ -378,14 +379,13 @@ class PeopleTableMap extends TableMap
     {
         if (null === $alias) {
             $criteria->addSelectColumn(PeopleTableMap::COL_ID);
-            $criteria->addSelectColumn(PeopleTableMap::COL_CUSERID);
-            $criteria->addSelectColumn(PeopleTableMap::COL_MUSERID);
             $criteria->addSelectColumn(PeopleTableMap::COL_TITLE);
             $criteria->addSelectColumn(PeopleTableMap::COL_LASTNAME);
             $criteria->addSelectColumn(PeopleTableMap::COL_FIRSTNAME);
             $criteria->addSelectColumn(PeopleTableMap::COL_EMAIL);
+            $criteria->addSelectColumn(PeopleTableMap::COL_EMAIL2);
             $criteria->addSelectColumn(PeopleTableMap::COL_ADDRESS);
-            $criteria->addSelectColumn(PeopleTableMap::COL_ZIPCODE);
+            $criteria->addSelectColumn(PeopleTableMap::COL_ZIP);
             $criteria->addSelectColumn(PeopleTableMap::COL_CITY);
             $criteria->addSelectColumn(PeopleTableMap::COL_STATE);
             $criteria->addSelectColumn(PeopleTableMap::COL_LATITUDE);
@@ -395,21 +395,20 @@ class PeopleTableMap extends TableMap
             $criteria->addSelectColumn(PeopleTableMap::COL_MAILINGLIST);
         } else {
             $criteria->addSelectColumn($alias . '.id');
-            $criteria->addSelectColumn($alias . '.cUserId');
-            $criteria->addSelectColumn($alias . '.mUserId');
             $criteria->addSelectColumn($alias . '.title');
-            $criteria->addSelectColumn($alias . '.lastName');
-            $criteria->addSelectColumn($alias . '.firstName');
+            $criteria->addSelectColumn($alias . '.lastname');
+            $criteria->addSelectColumn($alias . '.firstname');
             $criteria->addSelectColumn($alias . '.email');
+            $criteria->addSelectColumn($alias . '.email2');
             $criteria->addSelectColumn($alias . '.address');
-            $criteria->addSelectColumn($alias . '.zipCode');
+            $criteria->addSelectColumn($alias . '.zip');
             $criteria->addSelectColumn($alias . '.city');
             $criteria->addSelectColumn($alias . '.state');
             $criteria->addSelectColumn($alias . '.latitude');
             $criteria->addSelectColumn($alias . '.longitude');
             $criteria->addSelectColumn($alias . '.phone');
             $criteria->addSelectColumn($alias . '.lang');
-            $criteria->addSelectColumn($alias . '.mailingList');
+            $criteria->addSelectColumn($alias . '.mailinglist');
         }
     }
 

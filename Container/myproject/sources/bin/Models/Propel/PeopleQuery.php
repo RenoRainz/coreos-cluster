@@ -14,6 +14,5 @@ use Base\PeopleQuery as BasePeopleQuery;
  */
 class PeopleQuery extends BasePeopleQuery
 {
-	
-}
 
+}

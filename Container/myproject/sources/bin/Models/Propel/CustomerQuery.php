@@ -1,9 +1,9 @@
 <?php
 
-use Base\User as BaseUser;
+use Base\CustomerQuery as BaseCustomerQuery;
 
 /**
- * Skeleton subclass for representing a row from the 'user' table.
+ * Skeleton subclass for performing query and update operations on the 'customer' table.
  *
  *
  *
@@ -12,7 +12,7 @@ use Base\User as BaseUser;
  * long as it does not already exist in the output directory.
  *
  */
-class User extends BaseUser
+class CustomerQuery extends BaseCustomerQuery
 {
 
 }

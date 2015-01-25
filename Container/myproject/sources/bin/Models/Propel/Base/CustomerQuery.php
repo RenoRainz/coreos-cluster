@@ -2,11 +2,11 @@
 
 namespace Base;
 
-use \User as ChildUser;
-use \UserQuery as ChildUserQuery;
+use \Customer as ChildCustomer;
+use \CustomerQuery as ChildCustomerQuery;
 use \Exception;
 use \PDO;
-use Map\UserTableMap;
+use Map\CustomerTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
@@ -16,99 +16,99 @@ use Propel\Runtime\Connection\ConnectionInterface;
 use Propel\Runtime\Exception\PropelException;
 
 /**
- * Base class that represents a query for the 'user' table.
+ * Base class that represents a query for the 'customer' table.
  *
  *
  *
- * @method     ChildUserQuery orderById($order = Criteria::ASC) Order by the id column
- * @method     ChildUserQuery orderByPassword($order = Criteria::ASC) Order by the password column
- * @method     ChildUserQuery orderByLastlogin($order = Criteria::ASC) Order by the lastLogin column
- * @method     ChildUserQuery orderByLastaccess($order = Criteria::ASC) Order by the lastAccess column
- * @method     ChildUserQuery orderByLastpage($order = Criteria::ASC) Order by the lastPage column
- * @method     ChildUserQuery orderByLastip($order = Criteria::ASC) Order by the lastIp column
- * @method     ChildUserQuery orderByStatus($order = Criteria::ASC) Order by the status column
+ * @method     ChildCustomerQuery orderById($order = Criteria::ASC) Order by the id column
+ * @method     ChildCustomerQuery orderByPassword($order = Criteria::ASC) Order by the password column
+ * @method     ChildCustomerQuery orderByLastlogin($order = Criteria::ASC) Order by the lastlogin column
+ * @method     ChildCustomerQuery orderByLastaccess($order = Criteria::ASC) Order by the lastaccess column
+ * @method     ChildCustomerQuery orderByLastpage($order = Criteria::ASC) Order by the lastpage column
+ * @method     ChildCustomerQuery orderByLastip($order = Criteria::ASC) Order by the lastip column
+ * @method     ChildCustomerQuery orderByStatus($order = Criteria::ASC) Order by the status column
  *
- * @method     ChildUserQuery groupById() Group by the id column
- * @method     ChildUserQuery groupByPassword() Group by the password column
- * @method     ChildUserQuery groupByLastlogin() Group by the lastLogin column
- * @method     ChildUserQuery groupByLastaccess() Group by the lastAccess column
- * @method     ChildUserQuery groupByLastpage() Group by the lastPage column
- * @method     ChildUserQuery groupByLastip() Group by the lastIp column
- * @method     ChildUserQuery groupByStatus() Group by the status column
+ * @method     ChildCustomerQuery groupById() Group by the id column
+ * @method     ChildCustomerQuery groupByPassword() Group by the password column
+ * @method     ChildCustomerQuery groupByLastlogin() Group by the lastlogin column
+ * @method     ChildCustomerQuery groupByLastaccess() Group by the lastaccess column
+ * @method     ChildCustomerQuery groupByLastpage() Group by the lastpage column
+ * @method     ChildCustomerQuery groupByLastip() Group by the lastip column
+ * @method     ChildCustomerQuery groupByStatus() Group by the status column
  *
- * @method     ChildUserQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
- * @method     ChildUserQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
- * @method     ChildUserQuery innerJoin($relation) Adds a INNER JOIN clause to the query
+ * @method     ChildCustomerQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
+ * @method     ChildCustomerQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
+ * @method     ChildCustomerQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
- * @method     ChildUserQuery leftJoinPeople($relationAlias = null) Adds a LEFT JOIN clause to the query using the People relation
- * @method     ChildUserQuery rightJoinPeople($relationAlias = null) Adds a RIGHT JOIN clause to the query using the People relation
- * @method     ChildUserQuery innerJoinPeople($relationAlias = null) Adds a INNER JOIN clause to the query using the People relation
+ * @method     ChildCustomerQuery leftJoinPeople($relationAlias = null) Adds a LEFT JOIN clause to the query using the People relation
+ * @method     ChildCustomerQuery rightJoinPeople($relationAlias = null) Adds a RIGHT JOIN clause to the query using the People relation
+ * @method     ChildCustomerQuery innerJoinPeople($relationAlias = null) Adds a INNER JOIN clause to the query using the People relation
  *
  * @method     \PeopleQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
- * @method     ChildUser findOne(ConnectionInterface $con = null) Return the first ChildUser matching the query
- * @method     ChildUser findOneOrCreate(ConnectionInterface $con = null) Return the first ChildUser matching the query, or a new ChildUser object populated from the query conditions when no match is found
+ * @method     ChildCustomer findOne(ConnectionInterface $con = null) Return the first ChildCustomer matching the query
+ * @method     ChildCustomer findOneOrCreate(ConnectionInterface $con = null) Return the first ChildCustomer matching the query, or a new ChildCustomer object populated from the query conditions when no match is found
  *
- * @method     ChildUser findOneById(int $id) Return the first ChildUser filtered by the id column
- * @method     ChildUser findOneByPassword(string $password) Return the first ChildUser filtered by the password column
- * @method     ChildUser findOneByLastlogin(string $lastLogin) Return the first ChildUser filtered by the lastLogin column
- * @method     ChildUser findOneByLastaccess(string $lastAccess) Return the first ChildUser filtered by the lastAccess column
- * @method     ChildUser findOneByLastpage(string $lastPage) Return the first ChildUser filtered by the lastPage column
- * @method     ChildUser findOneByLastip(string $lastIp) Return the first ChildUser filtered by the lastIp column
- * @method     ChildUser findOneByStatus(int $status) Return the first ChildUser filtered by the status column *
+ * @method     ChildCustomer findOneById(int $id) Return the first ChildCustomer filtered by the id column
+ * @method     ChildCustomer findOneByPassword(string $password) Return the first ChildCustomer filtered by the password column
+ * @method     ChildCustomer findOneByLastlogin(string $lastlogin) Return the first ChildCustomer filtered by the lastlogin column
+ * @method     ChildCustomer findOneByLastaccess(string $lastaccess) Return the first ChildCustomer filtered by the lastaccess column
+ * @method     ChildCustomer findOneByLastpage(string $lastpage) Return the first ChildCustomer filtered by the lastpage column
+ * @method     ChildCustomer findOneByLastip(string $lastip) Return the first ChildCustomer filtered by the lastip column
+ * @method     ChildCustomer findOneByStatus(int $status) Return the first ChildCustomer filtered by the status column *
 
- * @method     ChildUser requirePk($key, ConnectionInterface $con = null) Return the ChildUser by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildUser requireOne(ConnectionInterface $con = null) Return the first ChildUser matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCustomer requirePk($key, ConnectionInterface $con = null) Return the ChildCustomer by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCustomer requireOne(ConnectionInterface $con = null) Return the first ChildCustomer matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
- * @method     ChildUser requireOneById(int $id) Return the first ChildUser filtered by the id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildUser requireOneByPassword(string $password) Return the first ChildUser filtered by the password column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildUser requireOneByLastlogin(string $lastLogin) Return the first ChildUser filtered by the lastLogin column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildUser requireOneByLastaccess(string $lastAccess) Return the first ChildUser filtered by the lastAccess column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildUser requireOneByLastpage(string $lastPage) Return the first ChildUser filtered by the lastPage column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildUser requireOneByLastip(string $lastIp) Return the first ChildUser filtered by the lastIp column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildUser requireOneByStatus(int $status) Return the first ChildUser filtered by the status column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCustomer requireOneById(int $id) Return the first ChildCustomer filtered by the id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCustomer requireOneByPassword(string $password) Return the first ChildCustomer filtered by the password column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCustomer requireOneByLastlogin(string $lastlogin) Return the first ChildCustomer filtered by the lastlogin column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCustomer requireOneByLastaccess(string $lastaccess) Return the first ChildCustomer filtered by the lastaccess column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCustomer requireOneByLastpage(string $lastpage) Return the first ChildCustomer filtered by the lastpage column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCustomer requireOneByLastip(string $lastip) Return the first ChildCustomer filtered by the lastip column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCustomer requireOneByStatus(int $status) Return the first ChildCustomer filtered by the status column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
- * @method     ChildUser[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildUser objects based on current ModelCriteria
- * @method     ChildUser[]|ObjectCollection findById(int $id) Return ChildUser objects filtered by the id column
- * @method     ChildUser[]|ObjectCollection findByPassword(string $password) Return ChildUser objects filtered by the password column
- * @method     ChildUser[]|ObjectCollection findByLastlogin(string $lastLogin) Return ChildUser objects filtered by the lastLogin column
- * @method     ChildUser[]|ObjectCollection findByLastaccess(string $lastAccess) Return ChildUser objects filtered by the lastAccess column
- * @method     ChildUser[]|ObjectCollection findByLastpage(string $lastPage) Return ChildUser objects filtered by the lastPage column
- * @method     ChildUser[]|ObjectCollection findByLastip(string $lastIp) Return ChildUser objects filtered by the lastIp column
- * @method     ChildUser[]|ObjectCollection findByStatus(int $status) Return ChildUser objects filtered by the status column
- * @method     ChildUser[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
+ * @method     ChildCustomer[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildCustomer objects based on current ModelCriteria
+ * @method     ChildCustomer[]|ObjectCollection findById(int $id) Return ChildCustomer objects filtered by the id column
+ * @method     ChildCustomer[]|ObjectCollection findByPassword(string $password) Return ChildCustomer objects filtered by the password column
+ * @method     ChildCustomer[]|ObjectCollection findByLastlogin(string $lastlogin) Return ChildCustomer objects filtered by the lastlogin column
+ * @method     ChildCustomer[]|ObjectCollection findByLastaccess(string $lastaccess) Return ChildCustomer objects filtered by the lastaccess column
+ * @method     ChildCustomer[]|ObjectCollection findByLastpage(string $lastpage) Return ChildCustomer objects filtered by the lastpage column
+ * @method     ChildCustomer[]|ObjectCollection findByLastip(string $lastip) Return ChildCustomer objects filtered by the lastip column
+ * @method     ChildCustomer[]|ObjectCollection findByStatus(int $status) Return ChildCustomer objects filtered by the status column
+ * @method     ChildCustomer[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
  */
-abstract class UserQuery extends ModelCriteria
+abstract class CustomerQuery extends ModelCriteria
 {
     protected $entityNotFoundExceptionClass = '\\Propel\\Runtime\\Exception\\EntityNotFoundException';
 
     /**
-     * Initializes internal state of \Base\UserQuery object.
+     * Initializes internal state of \Base\CustomerQuery object.
      *
      * @param     string $dbName The database name
      * @param     string $modelName The phpName of a model, e.g. 'Book'
      * @param     string $modelAlias The alias for the model in this query, e.g. 'b'
      */
-    public function __construct($dbName = 'pfw', $modelName = '\\User', $modelAlias = null)
+    public function __construct($dbName = 'pfw', $modelName = '\\Customer', $modelAlias = null)
     {
         parent::__construct($dbName, $modelName, $modelAlias);
     }
 
     /**
-     * Returns a new ChildUserQuery object.
+     * Returns a new ChildCustomerQuery object.
      *
      * @param     string $modelAlias The alias of a model in the query
      * @param     Criteria $criteria Optional Criteria to build the query from
      *
-     * @return ChildUserQuery
+     * @return ChildCustomerQuery
      */
     public static function create($modelAlias = null, Criteria $criteria = null)
     {
-        if ($criteria instanceof ChildUserQuery) {
+        if ($criteria instanceof ChildCustomerQuery) {
             return $criteria;
         }
-        $query = new ChildUserQuery();
+        $query = new ChildCustomerQuery();
         if (null !== $modelAlias) {
             $query->setModelAlias($modelAlias);
         }
@@ -131,19 +131,19 @@ abstract class UserQuery extends ModelCriteria
      * @param mixed $key Primary key to use for the query
      * @param ConnectionInterface $con an optional connection object
      *
-     * @return ChildUser|array|mixed the result, formatted by the current formatter
+     * @return ChildCustomer|array|mixed the result, formatted by the current formatter
      */
     public function findPk($key, ConnectionInterface $con = null)
     {
         if ($key === null) {
             return null;
         }
-        if ((null !== ($obj = UserTableMap::getInstanceFromPool((string) $key))) && !$this->formatter) {
+        if ((null !== ($obj = CustomerTableMap::getInstanceFromPool((string) $key))) && !$this->formatter) {
             // the object is already in the instance pool
             return $obj;
         }
         if ($con === null) {
-            $con = Propel::getServiceContainer()->getReadConnection(UserTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getReadConnection(CustomerTableMap::DATABASE_NAME);
         }
         $this->basePreSelect($con);
         if ($this->formatter || $this->modelAlias || $this->with || $this->select
@@ -164,11 +164,11 @@ abstract class UserQuery extends ModelCriteria
      *
      * @throws \Propel\Runtime\Exception\PropelException
      *
-     * @return ChildUser A model object, or null if the key is not found
+     * @return ChildCustomer A model object, or null if the key is not found
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, password, lastLogin, lastAccess, lastPage, lastIp, status FROM user WHERE id = :p0';
+        $sql = 'SELECT id, password, lastlogin, lastaccess, lastpage, lastip, status FROM customer WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -179,10 +179,10 @@ abstract class UserQuery extends ModelCriteria
         }
         $obj = null;
         if ($row = $stmt->fetch(\PDO::FETCH_NUM)) {
-            /** @var ChildUser $obj */
-            $obj = new ChildUser();
+            /** @var ChildCustomer $obj */
+            $obj = new ChildCustomer();
             $obj->hydrate($row);
-            UserTableMap::addInstanceToPool($obj, (string) $key);
+            CustomerTableMap::addInstanceToPool($obj, (string) $key);
         }
         $stmt->closeCursor();
 
@@ -195,7 +195,7 @@ abstract class UserQuery extends ModelCriteria
      * @param     mixed $key Primary key to use for the query
      * @param     ConnectionInterface $con A connection object
      *
-     * @return ChildUser|array|mixed the result, formatted by the current formatter
+     * @return ChildCustomer|array|mixed the result, formatted by the current formatter
      */
     protected function findPkComplex($key, ConnectionInterface $con)
     {
@@ -237,12 +237,12 @@ abstract class UserQuery extends ModelCriteria
      *
      * @param     mixed $key Primary key to use for the query
      *
-     * @return $this|ChildUserQuery The current query, for fluid interface
+     * @return $this|ChildCustomerQuery The current query, for fluid interface
      */
     public function filterByPrimaryKey($key)
     {
 
-        return $this->addUsingAlias(UserTableMap::COL_ID, $key, Criteria::EQUAL);
+        return $this->addUsingAlias(CustomerTableMap::COL_ID, $key, Criteria::EQUAL);
     }
 
     /**
@@ -250,12 +250,12 @@ abstract class UserQuery extends ModelCriteria
      *
      * @param     array $keys The list of primary key to use for the query
      *
-     * @return $this|ChildUserQuery The current query, for fluid interface
+     * @return $this|ChildCustomerQuery The current query, for fluid interface
      */
     public function filterByPrimaryKeys($keys)
     {
 
-        return $this->addUsingAlias(UserTableMap::COL_ID, $keys, Criteria::IN);
+        return $this->addUsingAlias(CustomerTableMap::COL_ID, $keys, Criteria::IN);
     }
 
     /**
@@ -276,18 +276,18 @@ abstract class UserQuery extends ModelCriteria
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
-     * @return $this|ChildUserQuery The current query, for fluid interface
+     * @return $this|ChildCustomerQuery The current query, for fluid interface
      */
     public function filterById($id = null, $comparison = null)
     {
         if (is_array($id)) {
             $useMinMax = false;
             if (isset($id['min'])) {
-                $this->addUsingAlias(UserTableMap::COL_ID, $id['min'], Criteria::GREATER_EQUAL);
+                $this->addUsingAlias(CustomerTableMap::COL_ID, $id['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
             if (isset($id['max'])) {
-                $this->addUsingAlias(UserTableMap::COL_ID, $id['max'], Criteria::LESS_EQUAL);
+                $this->addUsingAlias(CustomerTableMap::COL_ID, $id['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -298,7 +298,7 @@ abstract class UserQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(UserTableMap::COL_ID, $id, $comparison);
+        return $this->addUsingAlias(CustomerTableMap::COL_ID, $id, $comparison);
     }
 
     /**
@@ -314,7 +314,7 @@ abstract class UserQuery extends ModelCriteria
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
-     * @return $this|ChildUserQuery The current query, for fluid interface
+     * @return $this|ChildCustomerQuery The current query, for fluid interface
      */
     public function filterByPassword($password = null, $comparison = null)
     {
@@ -327,17 +327,17 @@ abstract class UserQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(UserTableMap::COL_PASSWORD, $password, $comparison);
+        return $this->addUsingAlias(CustomerTableMap::COL_PASSWORD, $password, $comparison);
     }
 
     /**
-     * Filter the query on the lastLogin column
+     * Filter the query on the lastlogin column
      *
      * Example usage:
      * <code>
-     * $query->filterByLastlogin('2011-03-14'); // WHERE lastLogin = '2011-03-14'
-     * $query->filterByLastlogin('now'); // WHERE lastLogin = '2011-03-14'
-     * $query->filterByLastlogin(array('max' => 'yesterday')); // WHERE lastLogin > '2011-03-13'
+     * $query->filterByLastlogin('2011-03-14'); // WHERE lastlogin = '2011-03-14'
+     * $query->filterByLastlogin('now'); // WHERE lastlogin = '2011-03-14'
+     * $query->filterByLastlogin(array('max' => 'yesterday')); // WHERE lastlogin > '2011-03-13'
      * </code>
      *
      * @param     mixed $lastlogin The value to use as filter.
@@ -348,18 +348,18 @@ abstract class UserQuery extends ModelCriteria
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
-     * @return $this|ChildUserQuery The current query, for fluid interface
+     * @return $this|ChildCustomerQuery The current query, for fluid interface
      */
     public function filterByLastlogin($lastlogin = null, $comparison = null)
     {
         if (is_array($lastlogin)) {
             $useMinMax = false;
             if (isset($lastlogin['min'])) {
-                $this->addUsingAlias(UserTableMap::COL_LASTLOGIN, $lastlogin['min'], Criteria::GREATER_EQUAL);
+                $this->addUsingAlias(CustomerTableMap::COL_LASTLOGIN, $lastlogin['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
             if (isset($lastlogin['max'])) {
-                $this->addUsingAlias(UserTableMap::COL_LASTLOGIN, $lastlogin['max'], Criteria::LESS_EQUAL);
+                $this->addUsingAlias(CustomerTableMap::COL_LASTLOGIN, $lastlogin['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -370,17 +370,17 @@ abstract class UserQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(UserTableMap::COL_LASTLOGIN, $lastlogin, $comparison);
+        return $this->addUsingAlias(CustomerTableMap::COL_LASTLOGIN, $lastlogin, $comparison);
     }
 
     /**
-     * Filter the query on the lastAccess column
+     * Filter the query on the lastaccess column
      *
      * Example usage:
      * <code>
-     * $query->filterByLastaccess('2011-03-14'); // WHERE lastAccess = '2011-03-14'
-     * $query->filterByLastaccess('now'); // WHERE lastAccess = '2011-03-14'
-     * $query->filterByLastaccess(array('max' => 'yesterday')); // WHERE lastAccess > '2011-03-13'
+     * $query->filterByLastaccess('2011-03-14'); // WHERE lastaccess = '2011-03-14'
+     * $query->filterByLastaccess('now'); // WHERE lastaccess = '2011-03-14'
+     * $query->filterByLastaccess(array('max' => 'yesterday')); // WHERE lastaccess > '2011-03-13'
      * </code>
      *
      * @param     mixed $lastaccess The value to use as filter.
@@ -391,18 +391,18 @@ abstract class UserQuery extends ModelCriteria
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
-     * @return $this|ChildUserQuery The current query, for fluid interface
+     * @return $this|ChildCustomerQuery The current query, for fluid interface
      */
     public function filterByLastaccess($lastaccess = null, $comparison = null)
     {
         if (is_array($lastaccess)) {
             $useMinMax = false;
             if (isset($lastaccess['min'])) {
-                $this->addUsingAlias(UserTableMap::COL_LASTACCESS, $lastaccess['min'], Criteria::GREATER_EQUAL);
+                $this->addUsingAlias(CustomerTableMap::COL_LASTACCESS, $lastaccess['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
             if (isset($lastaccess['max'])) {
-                $this->addUsingAlias(UserTableMap::COL_LASTACCESS, $lastaccess['max'], Criteria::LESS_EQUAL);
+                $this->addUsingAlias(CustomerTableMap::COL_LASTACCESS, $lastaccess['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -413,23 +413,23 @@ abstract class UserQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(UserTableMap::COL_LASTACCESS, $lastaccess, $comparison);
+        return $this->addUsingAlias(CustomerTableMap::COL_LASTACCESS, $lastaccess, $comparison);
     }
 
     /**
-     * Filter the query on the lastPage column
+     * Filter the query on the lastpage column
      *
      * Example usage:
      * <code>
-     * $query->filterByLastpage('fooValue');   // WHERE lastPage = 'fooValue'
-     * $query->filterByLastpage('%fooValue%'); // WHERE lastPage LIKE '%fooValue%'
+     * $query->filterByLastpage('fooValue');   // WHERE lastpage = 'fooValue'
+     * $query->filterByLastpage('%fooValue%'); // WHERE lastpage LIKE '%fooValue%'
      * </code>
      *
      * @param     string $lastpage The value to use as filter.
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
-     * @return $this|ChildUserQuery The current query, for fluid interface
+     * @return $this|ChildCustomerQuery The current query, for fluid interface
      */
     public function filterByLastpage($lastpage = null, $comparison = null)
     {
@@ -442,23 +442,23 @@ abstract class UserQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(UserTableMap::COL_LASTPAGE, $lastpage, $comparison);
+        return $this->addUsingAlias(CustomerTableMap::COL_LASTPAGE, $lastpage, $comparison);
     }
 
     /**
-     * Filter the query on the lastIp column
+     * Filter the query on the lastip column
      *
      * Example usage:
      * <code>
-     * $query->filterByLastip('fooValue');   // WHERE lastIp = 'fooValue'
-     * $query->filterByLastip('%fooValue%'); // WHERE lastIp LIKE '%fooValue%'
+     * $query->filterByLastip('fooValue');   // WHERE lastip = 'fooValue'
+     * $query->filterByLastip('%fooValue%'); // WHERE lastip LIKE '%fooValue%'
      * </code>
      *
      * @param     string $lastip The value to use as filter.
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
-     * @return $this|ChildUserQuery The current query, for fluid interface
+     * @return $this|ChildCustomerQuery The current query, for fluid interface
      */
     public function filterByLastip($lastip = null, $comparison = null)
     {
@@ -471,7 +471,7 @@ abstract class UserQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(UserTableMap::COL_LASTIP, $lastip, $comparison);
+        return $this->addUsingAlias(CustomerTableMap::COL_LASTIP, $lastip, $comparison);
     }
 
     /**
@@ -490,18 +490,18 @@ abstract class UserQuery extends ModelCriteria
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
-     * @return $this|ChildUserQuery The current query, for fluid interface
+     * @return $this|ChildCustomerQuery The current query, for fluid interface
      */
     public function filterByStatus($status = null, $comparison = null)
     {
         if (is_array($status)) {
             $useMinMax = false;
             if (isset($status['min'])) {
-                $this->addUsingAlias(UserTableMap::COL_STATUS, $status['min'], Criteria::GREATER_EQUAL);
+                $this->addUsingAlias(CustomerTableMap::COL_STATUS, $status['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
             if (isset($status['max'])) {
-                $this->addUsingAlias(UserTableMap::COL_STATUS, $status['max'], Criteria::LESS_EQUAL);
+                $this->addUsingAlias(CustomerTableMap::COL_STATUS, $status['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -512,7 +512,7 @@ abstract class UserQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(UserTableMap::COL_STATUS, $status, $comparison);
+        return $this->addUsingAlias(CustomerTableMap::COL_STATUS, $status, $comparison);
     }
 
     /**
@@ -523,20 +523,20 @@ abstract class UserQuery extends ModelCriteria
      *
      * @throws \Propel\Runtime\Exception\PropelException
      *
-     * @return ChildUserQuery The current query, for fluid interface
+     * @return ChildCustomerQuery The current query, for fluid interface
      */
     public function filterByPeople($people, $comparison = null)
     {
         if ($people instanceof \People) {
             return $this
-                ->addUsingAlias(UserTableMap::COL_ID, $people->getId(), $comparison);
+                ->addUsingAlias(CustomerTableMap::COL_ID, $people->getId(), $comparison);
         } elseif ($people instanceof ObjectCollection) {
             if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
 
             return $this
-                ->addUsingAlias(UserTableMap::COL_ID, $people->toKeyValue('PrimaryKey', 'Id'), $comparison);
+                ->addUsingAlias(CustomerTableMap::COL_ID, $people->toKeyValue('PrimaryKey', 'Id'), $comparison);
         } else {
             throw new PropelException('filterByPeople() only accepts arguments of type \People or Collection');
         }
@@ -548,7 +548,7 @@ abstract class UserQuery extends ModelCriteria
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return $this|ChildUserQuery The current query, for fluid interface
+     * @return $this|ChildCustomerQuery The current query, for fluid interface
      */
     public function joinPeople($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
@@ -595,21 +595,21 @@ abstract class UserQuery extends ModelCriteria
     /**
      * Exclude object from result
      *
-     * @param   ChildUser $user Object to remove from the list of results
+     * @param   ChildCustomer $customer Object to remove from the list of results
      *
-     * @return $this|ChildUserQuery The current query, for fluid interface
+     * @return $this|ChildCustomerQuery The current query, for fluid interface
      */
-    public function prune($user = null)
+    public function prune($customer = null)
     {
-        if ($user) {
-            $this->addUsingAlias(UserTableMap::COL_ID, $user->getId(), Criteria::NOT_EQUAL);
+        if ($customer) {
+            $this->addUsingAlias(CustomerTableMap::COL_ID, $customer->getId(), Criteria::NOT_EQUAL);
         }
 
         return $this;
     }
 
     /**
-     * Deletes all rows from the user table.
+     * Deletes all rows from the customer table.
      *
      * @param ConnectionInterface $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).
@@ -617,7 +617,7 @@ abstract class UserQuery extends ModelCriteria
     public function doDeleteAll(ConnectionInterface $con = null)
     {
         if (null === $con) {
-            $con = Propel::getServiceContainer()->getWriteConnection(UserTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(CustomerTableMap::DATABASE_NAME);
         }
 
         // use transaction because $criteria could contain info
@@ -628,8 +628,8 @@ abstract class UserQuery extends ModelCriteria
             // Because this db requires some delete cascade/set null emulation, we have to
             // clear the cached instance *after* the emulation has happened (since
             // instances get re-added by the select statement contained therein).
-            UserTableMap::clearInstancePool();
-            UserTableMap::clearRelatedInstancePool();
+            CustomerTableMap::clearInstancePool();
+            CustomerTableMap::clearRelatedInstancePool();
 
             return $affectedRows;
         });
@@ -647,26 +647,26 @@ abstract class UserQuery extends ModelCriteria
     public function delete(ConnectionInterface $con = null)
     {
         if (null === $con) {
-            $con = Propel::getServiceContainer()->getWriteConnection(UserTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(CustomerTableMap::DATABASE_NAME);
         }
 
         $criteria = $this;
 
         // Set the correct dbName
-        $criteria->setDbName(UserTableMap::DATABASE_NAME);
+        $criteria->setDbName(CustomerTableMap::DATABASE_NAME);
 
         // use transaction because $criteria could contain info
         // for more than one table or we could emulating ON DELETE CASCADE, etc.
         return $con->transaction(function () use ($con, $criteria) {
             $affectedRows = 0; // initialize var to track total num of affected rows
 
-            UserTableMap::removeInstanceFromPool($criteria);
+            CustomerTableMap::removeInstanceFromPool($criteria);
 
             $affectedRows += ModelCriteria::delete($con);
-            UserTableMap::clearRelatedInstancePool();
+            CustomerTableMap::clearRelatedInstancePool();
 
             return $affectedRows;
         });
     }
 
-} // UserQuery
+} // CustomerQuery
