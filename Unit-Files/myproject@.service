@@ -4,8 +4,8 @@ Description=Myproject website
 [Service]
 ExecStartPre=-/usr/bin/docker kill myproject-%i
 ExecStartPre=-/usr/bin/docker rm myproject-%i
-ExecStartPre=-/usr/bin/docker pull quay.io/renorainz/myproject:0.0.7
-ExecStart=/usr/bin/docker run --rm --name myproject-%i quay.io/renorainz/myproject:0.0.7
+ExecStartPre=-/usr/bin/docker pull quay.io/renorainz/myproject
+ExecStart=/usr/bin/docker run --rm --name myproject-%i quay.io/renorainz/myproject
 ExecStop=/usr/bin/docker stop myproject-%i
 
 [X-Fleet]
