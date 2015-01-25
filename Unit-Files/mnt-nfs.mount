@@ -1,0 +1,12 @@
+[Unit]
+Description=NFS Directories
+Documentation=man:hier(7)
+DefaultDependencies=no
+Conflicts=umount.target
+Before=local-fs.target umount.target
+
+[Mount]
+What=172.17.8.100:/data/shared
+Where=/mnt/nfs
+Type=nfs
+Options=rw

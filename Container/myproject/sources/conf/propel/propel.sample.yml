@@ -1,0 +1,26 @@
+propel:
+  general:
+    project: myproject
+    version: 0.0.2
+  paths:
+    phpDir: bin/Models/Propel
+    phpConfDir: conf/propel
+    schemaDir: conf/propel
+    migrationDir: conf/propel/migration
+    sqlDir: conf/propel/sql
+  database:
+    connections:
+      pfw:
+        adapter: mysql
+        classname: Propel\Runtime\Connection\ConnectionWrapper
+        dsn: "mysql:host=myproject-mysql.example.lan;dbname=myproject"
+        user: myproject
+        password: myproject
+        settings:
+          charset: utf8
+          queries:
+            utf8: "SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci"
+  generator:
+    defaultConnection: pfw
+    connections:
+      - pfw

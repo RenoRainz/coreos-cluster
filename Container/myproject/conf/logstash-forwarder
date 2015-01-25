@@ -1,0 +1,19 @@
+{
+    "network": {
+        "servers": [
+            "172.26.189.231:5000"
+        ],
+        "timeout": 15,
+        "ssl ca": "/etc/logstash/ssl/logstash-forwarder.crt"
+    },
+    "files": [
+        {
+            "paths": [
+                "/app/myproject/log/*.log"
+            ],
+            "fields": {
+                "type": "apache2"
+            }
+        }
+    ]
+}

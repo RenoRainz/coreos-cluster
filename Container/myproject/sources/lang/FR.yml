@@ -1,0 +1,243 @@
+mr: M.
+mrs: Mrs
+miss: Miss
+chooseAValue: Choisissez une valeur
+variable: Variable
+content: Contenu
+title: Titre
+url: Url
+metaDescription: Description
+metaKeywords: Mots-clés
+add: Ajouter
+images: Images
+yes: Oui
+no: Non
+name: Nom
+authorized: Autorisé
+refused: Refusé
+enterLocation: Saisissez une adresse
+notActivated: Désactivé
+activated: Activé
+accountBlocked: Compte bloqué
+value: Valeur
+pictureUrl: URL de la photo
+FR: Français
+EN: Anglais
+IT: Italien
+DE: Allemand
+notEnoughRights: Droits insuffisants.
+incorrectPassword: Le mot de passe est incorrect.
+unknownEmail: Cet email n'existe pas.
+recoveryEmailSent: Un email vous a été transmis afin de pouvoir récupérer votre mot de passe.
+zipNotCorresponding: Le code postal ne correspond pas à l'adresse renseignée !
+unknownEmail: Aucun compte n'est attaché à cette adresse email !
+invalidPassword: Le mot de passe est incorrect !
+invalidZipCode: Le code postal est incorrect !
+invalidEmail: L'adresse email est incorrecte !
+invalidValues: Les valeurs entrées sont incorrectes !
+noResultId: Aucun résultat existant avec l'ID :
+email: Email
+password: Mot de Passe
+login: Login
+rememberMe: Se souvenir de moi
+lostPassword: Mot de passe perdu ?
+zipCode: Code Postal
+retreivePassword: Récupérez votre mot de passe
+loggedAs: 
+dashboard: Dashboard
+about: À propos
+profile: Profil
+fullScreen: Plein écran
+administration: Administration
+visit: Voir le site web
+logout: Se déconnecter
+statistics: Statistiques
+settings: Paramètres
+helpdesk: Support
+users: Utilisateurs
+roles: Rôles
+rules: Règles
+pages: Pages
+pageTemplates: Gabarits de page
+menus: Menus
+files: Fichiers
+sliders: Sliders
+teamwords: Mots de l'équipe
+forms: Formulaires
+customData: Données personnalisées
+news: News
+mails: Emails
+contacts: Contacts
+logs: Logs
+accesslist: ACL
+sessions: Sessions
+monitoring: Etat du système
+configuration: Configuration
+contact: Contact
+init: Initialiser
+advancedSearch: Recherche avancée
+noVariableAvailable: Aucune variable disponible
+text: Texte
+image: Image
+datas: Données
+data: Donnée
+peoples: Personnes
+cms: CMS
+usage: Utilisation
+user: Utilisateur
+insertUser: Nouvel utilisateur
+updateUser: Modifier un utilisateur
+firstName: Prénom
+lastName: Nom
+level: Niveau
+type: Type
+gender: Sexe
+birthday: Anniversaire
+address: Adresse
+city: Ville
+country: Pays
+phone: Téléphone
+lastLogin: Dernière connexion
+lastAccess: Dernier accès
+lastIp: Dernière IP utilisée
+lastPage: Dernière page visitée
+userSuccessInsert: Utilisateur ajouté !
+userSuccessUpdate: Utilisateur modifié !
+userSuccessDelete: Utilisateur supprimé !
+mails: Emails
+informations: Informations
+titleMr: M.
+titleMrs: Mme
+titleMiss: Mlle
+male: Homme
+female: Femme
+admin: Administrateur
+toValidate: A valider
+active: Activé
+closed: Bloqué
+role: Rôle
+insertRole: Nouveau rôle
+updateRole: Modifier un rôle
+usersCount: Nombre de personnes
+roleSuccessInsert: Rôle ajouté !
+roleSuccessUpdate: Rôle modifié !
+roleSuccessDelete: Rôle supprimé !
+rule: Règle
+insertRule: Nouvelle règle
+updateRule: Modifier une règle
+ruleSuccessInsert: Règle ajoutée !
+ruleSuccessUpdate: Règle modifiée !
+ruleSuccessDelete: Règle supprimée !
+entities: Entités
+insertEntity: Nouvelle entité
+position: Position
+application: Application
+module: Module
+action: Action
+objects: Objets
+fields: Champs
+rights: Droits
+menu: Menu
+insertMenu: Nouveau menu
+updateMenu: Modifier un menu
+menuSuccessInsert: Menu ajouté !
+menuSuccessUpdate: Menu modifié !
+menuSuccessDelete: Menu supprimé !
+page: Page
+insertPage: Nouvelle page
+updatePage: Modifier une page
+pageSuccessInsert: Page ajoutée !
+pageSuccessUpdate: Page modifiée !
+pageSuccessDelete: Page supprimée !
+pagetemplates: Gabarits de page
+pagetemplate: Gabarit de page
+pageTemplate: Gabarit de page
+insertPageTemplate: Nouveau gabarit
+updatePageTemplate: Modifier un gabarit
+pageTemplateSuccessInsert: Gabarit ajouté !
+pageTemplateSuccessUpdate: Gabarit modifié !
+pageTemplateSuccessDelete: Gabarit supprimé !
+astemplate: Tel que le gabarit
+slider: Slider
+insertSlider: Nouveau slider
+updateSlider: Modifier un slider
+sliderSuccessInsert: Slider ajouté !
+sliderSuccessUpdate: Slider modifié !
+sliderSuccessDelete: Slider supprimé !
+chooseAnImageOrVideo: Choisissez une image ou saisissez l'URL d'une vidéo Vimeo - ex : player.vimeo.com/video/97799317
+vegasslider: Vegas Slider
+nivoslider: Nivo Slider
+royalslider: Royal Slider
+royalsliderfull: Royal Slider + Thumbs
+teamword: Mot de l'équipe
+insertTeamword: Nouveau mot de l'équipe
+updateTeamword: Modifier un mot de l'équipe
+teamwordSuccessInsert: Mot de l'équipe ajouté !
+teamwordSuccessUpdate: Mot de l'équipe modifié !
+teamwordSuccessDelete: Mot de l'équipe supprimé !
+comment: Commentaire
+insertComment: Nouveau commentaire
+updateComment: Modifier un commentaire
+commentSuccessInsert: Commentaire ajouté !
+commentSuccessUpdate: Commentaire modifié !
+commentSuccessDelete: Commentaire supprimé !
+comments: Commentaires
+rate: Note
+mailinglists: Newsletters
+gmapsvisit: Visite 360°
+insertGmapsvisit: Nouvelle visite 360°
+updateGmapsvisit: Modifier une visite 360°
+gmapsvisitSuccessInsert: Visite 360° ajoutée !
+gmapsvisitSuccessUpdate: Visite 360° modifiée !
+gmapsvisitSuccessDelete: Visite 360° supprimée !
+gmapsvisits: Visites 360°
+form: Formulaire
+insertForm: Nouveau formulaire
+updateForm: Modifier un formulaire
+formSuccessInsert: Formulaire ajouté !
+formSuccessUpdate: Formulaire modifié !
+formSuccessDelete: Formulaire supprimé !
+mail: Mail
+insertMail: Nouvel mail
+updateMail: Modifier un mail
+mailSuccessInsert: Mail ajouté !
+mailSuccessUpdate: Mail modifié !
+mailSuccessDelete: Mail supprimé !
+sentDate: Date d'envoi
+sender: Emetteur
+recipients: Destinataires
+noMails: Aucun email
+subject: Sujet
+lei: LEI
+leiListByType: LEI Liste par Type
+leiDisplayByUniqueId: LEI Fiche par ID
+leiUniqueId: LEI ID Unique
+published: Publié
+insert: Ajouter
+update: Modifier
+delete: Supprimer
+cancel: Annuler
+search: Rechercher
+cardindex: Fiche
+show: Voir
+loading: Chargement
+by: par
+status: Statut
+lang: Langue
+created: Créé le
+modified: Modifié le
+invalid: Invalide
+deleteConfirmationQuestion: Êtes-vous sûr de vouloir supprimer
+other: Autre
+executionTime: Page éxécutée en
+executionTimeTest: Page éxécutée en {1} seconde{1-s}.
+sProcessing: Chargement..
+sLengthMenu: Voir _MENU_ entrées
+sZeroRecords: Aucun résultat
+sInfo: Résultats _START_ à _END_ sur _TOTAL_ entrées
+sInfoEmpty: Aucun résultat dans la base
+sInfoFiltered: (filtré depuis _MAX_ entrées)
+start: Début
+end: Fin
+next: Suivant
+prev: Précédent

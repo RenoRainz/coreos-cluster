@@ -1,0 +1,159 @@
+#cloud-config
+
+coreos:
+  etcd:
+    # generate a new token for each unique cluster from https://discovery.etcd.io/new
+    # WARNING: replace each time you 'vagrant destroy'
+    discovery: https://discovery.etcd.io/6fa174488993a51f8bb9d95b74fc16b0
+    addr: $public_ipv4:4001
+    peer-addr: $public_ipv4:7001
+  fleet:
+    public-ip: $public_ipv4
+  flannel:
+    interface: $public_ipv4
+  units:
+    - name: etcd.service
+      command: start
+    - name: flanneld.service
+      drop-ins:
+        - name: 50-network-config.conf
+          content: |
+            [Service]
+            ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "192.168.0.0/16" }'
+      command: start
+    - name: fleet.service
+      command: start
+    - name: docker-tcp.socket
+      command: start
+      enable: true
+      content: |
+        [Unit]
+        Description=Docker Socket for the API
+
+        [Socket]
+        ListenStream=2375
+        Service=docker.service
+        BindIPv6Only=both
+
+        [Install]
+        WantedBy=sockets.target
+    - name: register-core.service
+      command: start
+      enable: true
+      content: |
+        [Unit]
+        Description=Announce Coreos Host
+        After=etcd.service
+        Requires=etcd.service
+
+        [Service]
+        ExecStart=/bin/sh -c "while true; do etcdctl set /coreos.com/cluster/%H '{ip_addr:$public_ipv4}' --ttl 60;sleep 45;done"
+        ExecStop=/usr/bin/etcdctl rm /coreos.com/cluster/%H
+        
+        [Install]
+        WantedBy=multi-user.target
+    - name: register-core-dns.service
+      command: start
+      enable: true
+      content: |
+        [Unit]
+        Description=Announce Coreos Host on DNS branch
+        After=etcd.service
+        Requires=etcd.service
+
+        [Service]
+        ExecStart=/bin/sh -c "while true; do etcdctl set /domains/example.lan/%H '{%H:$public_ipv4}' --ttl 60;sleep 45;done"
+        ExecStop=/usr/bin/etcdctl rm /domains/example.lan/%H
+        
+        [Install]
+        WantedBy=multi-user.target
+    - name: update-hosts.service
+      command: start
+      enable: true
+      content: |
+        [Unit]
+        Description=Update /etc/hosts
+        After=etcd.service
+        Requires=etcd.service
+
+        [Service]
+        ExecStart=/bin/bash -c "while true; do /root/update-hosts.sh ;sleep 45;done"
+        ExecStop=/bin/echo STOP
+        
+        [Install]
+        WantedBy=multi-user.target
+    - name: mnt-nfs.mount
+      command: start
+      enable: true
+      content: |
+        [Unit]
+        Description=NFS Directories
+        Documentation=man:hier(7)
+        DefaultDependencies=no
+        Conflicts=umount.target
+        Before=local-fs.target umount.target
+
+        [Mount]
+        What=172.17.8.100:/data/shared
+        Where=/mnt/nfs
+        Type=nfs
+        Options=rw
+        [Install]
+        WantedBy=multi-user.target
+write_files:
+  - path: /root/update-hosts.sh
+    permissions: 0744
+    owner: root
+    content: |
+      # Clean du fichier host
+      >/etc/hosts
+      # Mise a jour du fichier
+      # Decouverte des noms de domaines
+      for i in `etcdctl ls /domains/`;
+      do domain=`/usr/bin/basename $i`;
+      for j in `etcdctl ls /domains/$domain/`;do etcdctl get $j | awk -v d=$domain -F\: '{print $2 " " $1 " " $1"."d}' | tr -d {}\"   >>/etc/hosts;done;
+      done;
+  - path: /home/core/discover.bash
+    permissions: 0744
+    owner: root
+    content: |
+      #!/bin/bash
+      # Script qui gere l'annonce de l'ip
+      # du container dans le cluster etcd
+      if [ ! $# -eq 3 ]
+      then
+      echo "Usage : discover.bash [set|del] container-name domain"
+      exit 1
+      fi
+      ACTION=$1
+      CONTAINER_NAME=$2
+      DOMAIN=$3
+      function set {
+      get-ip
+      etcdctl set /domains/$DOMAIN/$CONTAINER_NAME "{$CONTAINER_NAME:$IP}" --ttl 60
+      }
+      function del {
+      etcdctl rm  /domains/$DOMAIN/$CONTAINER_NAME
+      }
+      function get-ip {
+      id=`docker ps |grep $CONTAINER_NAME  | awk '{print $1}'`
+      if [ -n "$id" ]
+      then
+      IP=`docker inspect $id | grep IPAddress | awk '{print $2}' | tr -d \"\,`
+      else
+      echo "Container not found"
+      exit 2
+      fi
+      }
+      # Main
+      case $ACTION in
+      set)
+      set
+      ;;
+      del)
+      del
+      ;;
+      *)
+      echo "Action : [set|del]"
+      ;;
+      esac

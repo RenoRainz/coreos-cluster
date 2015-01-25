@@ -1,0 +1,11 @@
+[Unit]
+Description=Annonunce Myproject Database
+BindsTo=myproject-mysql.service
+After=myproject-mysql.service
+
+[Service]
+ExecStart=/bin/sh -c "while true; do /home/core/discover.bash set myproject-mysql example.lan;sleep 45;done"
+ExecStop=/home/core/discover.bash rm myproject-mysql example.lan
+
+[X-Fleet]
+MachineOf=myproject-mysql.service

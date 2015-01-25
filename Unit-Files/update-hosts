@@ -1,0 +1,15 @@
+    - name: update-hosts.service
+      command: start
+      enable: true
+      content: |
+      [Unit]
+        Description=Update /etc/hosts
+        After=etcd.service
+        Requires=etcd.service
+
+        [Service]
+        ExecStart=/bin/sh -c "while true; do /root/update-hosts.sh ;sleep 45;done"
+        ExecStop=/bin/echo STOP
+        
+        [Install]
+        WantedBy=multi-user.target

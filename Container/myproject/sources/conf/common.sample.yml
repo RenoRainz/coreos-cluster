@@ -1,0 +1,35 @@
+---
+debug: true
+urls:
+  - localhost
+default:
+  database: production
+  smtp: production
+  language: EN
+  role: visitor
+auth:
+  methods:
+    local:
+      enabled: true
+    ldap:
+      enabled: false
+databases:
+  production:
+    adapter: mysql
+    dsn: "mysql:host=myproject-mysql.example.lan;dbname=myproject"
+    username: myproject
+    password: myproject
+    settings:
+      charset: utf8
+      queries:
+        utf8: "SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci"
+smtps:
+  production:
+    hostname: localhost
+    username: myproject@localhost
+    password: myproject
+    port: 25
+    ssl: false
+languages:
+  - EN
+  - FR

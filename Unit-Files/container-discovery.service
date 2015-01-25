@@ -1,0 +1,7 @@
+[Unit]
+Description=Annonunce Myproject Database
+After=etcd.service
+
+[Service]
+ExecStart=
+ExecStop=

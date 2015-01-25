@@ -1,0 +1,9 @@
+{
+    "require": {
+    	"php": ">=5.4.0",
+        "propel/propel": "~2.0@dev"
+    },
+    "autoload": {
+    	"classmap": [ "bin/Models/Kernel", "bin/Models/Propel" ]
+    }
+}

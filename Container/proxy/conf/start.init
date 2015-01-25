@@ -1,0 +1,15 @@
+#!/bin/bash
+#######################################
+# Setup application start			  #
+#######################################
+
+# Get hosts ip
+nohup sh -c "while true; do /usr/local/bin/get-hosts.bash; sleep 30;done; " &
+
+sleep 5
+
+# Start of log stash
+service logstash-forwarder start
+
+# Start d'Hipache
+/usr/local/bin/hipache --config /etc/hipache-json.conf

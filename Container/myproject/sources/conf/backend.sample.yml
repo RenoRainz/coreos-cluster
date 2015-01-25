@@ -1,0 +1,10 @@
+---
+version: 0.0.1
+
+routes:
+  '/':
+    module: user
+    action: index
+  '/api/users':
+    module: user
+    action: api

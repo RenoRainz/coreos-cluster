@@ -1,0 +1,11 @@
+[Unit]
+Description=Annonunce Redis Database
+BindsTo=redis-server.service
+After=redis-server.service
+
+[Service]
+ExecStart=/bin/sh -c "while true; do /home/core/discover.bash set redis-server example.lan;sleep 45;done"
+ExecStop=/home/core/discover.bash rm redis-server example.lan
+
+[X-Fleet]
+MachineOf=redis-server.service

@@ -1,0 +1,21 @@
+#!/bin/bash
+#######################################
+# Setup application start			  #
+#######################################
+
+# Get hosts ip
+nohup sh -c "while true; do /usr/local/bin/get-hosts.bash; sleep 30;done; " &
+
+sleep 5
+
+# Database setup
+cd /app/myproject && vendor/bin/propel --config-dir=conf/propel sql:build && vendor/bin/propel --config-dir=conf/propel sql:insert
+
+# Start of log stash
+service logstash-forwarder start
+
+# Register backend into redis
+/usr/local/bin/backend-register.bash
+
+# Lancement d'apache
+/usr/sbin/apache2ctl -D FOREGROUND
