@@ -43,8 +43,6 @@ RUN a2enmod rewrite
 # Disable default site
 RUN a2dissite 000-default
 
-RUN mkdir /tmp/toto
-
 # FS data creation
 RUN mkdir -p /data/myproject
 RUN chown -R myproject:www-data /data/myproject
