@@ -7,7 +7,7 @@ FROM ubuntu:14.04
 MAINTAINER SYSRES
 
 # Software Installation 
-RUN apt-get update && apt-get install -y --force-yes apache2 php5 php5-mysql git curl redis-tools
+RUN apt-get update && apt-get install -y --force-yes apache2 php5 php5-mysql git curl redis-tools 
 
 # Logstashforwarder Configuration 
 ADD ./packages/logstash-forwarder_0.3.1_amd64.deb /tmp/
@@ -42,6 +42,8 @@ RUN a2enmod rewrite
 
 # Disable default site
 RUN a2dissite 000-default
+
+RUN mkdir /tmp/toto
 
 # FS data creation
 RUN mkdir -p /data/myproject
