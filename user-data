@@ -4,7 +4,7 @@ coreos:
   etcd:
     # generate a new token for each unique cluster from https://discovery.etcd.io/new
     # WARNING: replace each time you 'vagrant destroy'
-    discovery: https://discovery.etcd.io/6fa174488993a51f8bb9d95b74fc16b0
+    discovery: https://discovery.etcd.io/e32690a5a23df40e2d4896bd64a084c5
     addr: $public_ipv4:4001
     peer-addr: $public_ipv4:7001
   fleet:
@@ -67,21 +67,34 @@ coreos:
         
         [Install]
         WantedBy=multi-user.target
-    - name: update-hosts.service
+    - name: register-core-dns.service
       command: start
       enable: true
       content: |
         [Unit]
-        Description=Update /etc/hosts
+        Description=Announce Coreos Host on DNS branch
         After=etcd.service
         Requires=etcd.service
 
         [Service]
-        ExecStart=/bin/bash -c "while true; do /root/update-hosts.sh ;sleep 45;done"
-        ExecStop=/bin/echo STOP
+        ExecStart=/bin/sh -c "while true; do etcdctl set /domains/example.lan/%H '{%H:$public_ipv4}' --ttl 60;sleep 45;done"
+        ExecStop=/usr/bin/etcdctl rm /domains/example.lan/%H
         
         [Install]
         WantedBy=multi-user.target
+    - name: redis-server.service
+      command: start
+      enable: true
+      content: |
+        [Unit]
+        Description=Redis Server
+
+        [Service]
+        ExecStartPre=-/usr/bin/docker kill redis
+        ExecStartPre=-/usr/bin/docker rm redis
+        ExecStartPre=-/usr/bin/docker pull mysql
+        ExecStart=/usr/bin/docker run -rm --name redis-server redis
+        ExecStop=/usr/bin/docker stop redis
     - name: mnt-nfs.mount
       command: start
       enable: true
